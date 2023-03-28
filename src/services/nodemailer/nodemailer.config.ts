@@ -5,7 +5,7 @@ dotenv.config();
 const user: string = process.env.NODEMAILER_USER as string;
 const password: string = process.env.NODEMAILER_PASS as string;
 
-const sendEmail = nodemailer.createTransport({
+const EmailConfig = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,
   secure: true,
@@ -15,4 +15,4 @@ const sendEmail = nodemailer.createTransport({
   },
 });
 
-export default sendEmail;
+export default EmailConfig;

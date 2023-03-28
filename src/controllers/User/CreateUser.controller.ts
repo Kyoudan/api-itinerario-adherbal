@@ -8,7 +8,7 @@ import { config } from "dotenv";
 import prismaClient from "../../database/prismaClient";
 import * as uuid from "uuid";
 import * as bcrypt from "bcrypt";
-import sendEmail from "../../nodemailer/nodemailer.config";
+import sendEmail from "../../services/nodemailer/sendEmail";
 config();
 
 const baseurl = process.env.BASE_URL;
@@ -42,26 +42,22 @@ class CreateUserController {
         },
       });
 
-      sendEmail
-        .sendMail({
-          from: "Itinerario Se Liga na midia",
-          to: `${email}`,
-          subject: "Ativação de conta",
-          html: `
-							<img src="${LogoItinerario}" style="width: 350px; height: 350px;"/>
-							<br />
-							<p style="${TextActivateAccount}">Ative a sua conta do itinerario formativo: se liga na midia, clicando no botão a seguir:</p>
-							<a href="${baseurl}/activateAccount?uid=${user.id}&token=${token}" style="${ButtonActivateAccount}">Ativar</a>
-							`,
-          text: "Ativação de conta",
-        })
-        .then(() => console.log("Enviado!!"))
-        .catch((err) => console.log("Erro ao enviar", err));
+      const from = "Itinerario se liga na midia";
+      const subject = "Ativação de conta";
+      const text = "Ativação de conta";
+      const html = `
+      <img src="${LogoItinerario}" style="width: 350px; height: 350px;"/>
+      <br />
+      <p style="${TextActivateAccount}">Ative a sua conta do itinerario formativo: se liga na midia, clicando no botão a seguir:</p>
+      <a href="${baseurl}/activateAccount?uid=${user.id}&token=${token}" style="${ButtonActivateAccount}">Ativar</a>
+      `;
+
+      sendEmail(from, email, subject, html, text);
 
       res.status(201).json({ message: "Usuario cadastrado com sucesso" });
     } catch (err: any) {
       if (err.meta.target[0] == "email") {
-        res.status(400).json({ message: "Email ja cadastrado" });
+        return res.status(400).json({ message: "Email ja cadastrado" });
       }
       res.status(500).json({ message: "Erro ao cadastrar usuario" });
     }
