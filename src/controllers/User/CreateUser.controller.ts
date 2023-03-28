@@ -61,7 +61,10 @@ class CreateUserController {
 				.catch((err) => console.log('Erro ao enviar', err));
 
 			res.status(201).json({ message: 'Usuario cadastrado com sucesso' });
-		} catch {
+		} catch (err: any){
+			if(err.meta.target[0] == 'email'){
+				res.status(400).json({message: "Email ja cadastrado"})
+			}
 			res.status(500).json({ message: 'Erro ao cadastrar usuario' });
 		}
 	}
