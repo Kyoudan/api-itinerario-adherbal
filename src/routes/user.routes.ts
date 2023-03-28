@@ -4,12 +4,15 @@ import LoginUserController from "../controllers/Login/LoginUser.controller";
 import CreateUserController from "../controllers/User/CreateUser.controller";
 import FindAllUsersController from "../controllers/User/FindAllUsers.controller";
 import FindOneUserController from "../controllers/User/FindOneUser.controller";
+import UpdateUserController from "../controllers/User/UpdateUser.controller";
+import AuthUser from "../middleware/AuthUser";
 const routes = Router();
 
 routes.get("/users", FindAllUsersController.handle);
 routes.get("/users/:id", FindOneUserController.handle);
 routes.post("/users", CreateUserController.handle);
 routes.post("/login", LoginUserController.handle);
+routes.put("/users", AuthUser, UpdateUserController.handle);
 routes.get("/activateAccount", ActiveAccountController.handle);
 
 export default routes;
