@@ -53,7 +53,7 @@ class CreateUserController {
 							<img src="${LogoItinerario}" style="width: 350px; height: 350px;"/>
 							<br />
 							<p style="${TextActivateAccount}">Ative a sua conta do itinerario formativo: se liga na midia, clicando no botão a seguir:</p>
-							<a href="${baseurl}/activateAccount/${user.id}/${token}" style="${ButtonActivateAccount}">Ativar</a>
+							<a href="${baseurl}/activateAccount?uid=${user.id}&token=${token}" style="${ButtonActivateAccount}">Ativar</a>
 							`,
 					text: 'Ativação de conta',
 				})
