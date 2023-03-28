@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model activateAccounts {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique @db.VarChar(255)
+  createdAt DateTime @default(now())
+  userId    Int
+  users     users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("activateaccounts")
+}
+
+model postcategories {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+
+  @@map("postcategories")
+}
+
+model posts {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  slug      String   @unique @db.VarChar(255)
+  color     String   @db.VarChar(255)
+  finished  Boolean  @default(false)
+  userId    Int
+  createdAt DateTime @default(now())
+  users     users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("posts")
+}
+
+model recoverPasswords {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique @db.VarChar(255)
+  createdAt DateTime @default(now())
+  userId    Int
+  users     users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("recoverpasswords")
+}
+
+model users {
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(255)
+  description      String?            @db.VarChar(255)
+  email            String             @unique @db.VarChar(255)
+  password         String             @db.VarChar(255)
+  activated        Boolean            @default(false)
+  createdAt        DateTime           @default(now())
+  activateAccounts activateAccounts[]
+  posts            posts[]
+  recoverPasswords recoverPasswords[]
+
+  @@map("users")
+}
