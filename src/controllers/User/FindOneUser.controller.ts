@@ -8,7 +8,7 @@ class FindOneUserController {
 
       if (!queryId) return res.status(400).json({ message: "Id invalido!!" });
       const id = parseInt(queryId);
-      const result = prismaClient.users.findUnique({
+      const result = await prismaClient.users.findUnique({
         where: {
           id: id,
         },
@@ -20,7 +20,7 @@ class FindOneUserController {
           createdAt: true,
         },
       });
-      res.status(200).json(result);
+      res.status(200).json(result)
     } catch {
       res.status(500).json({ message: "Erro ao buscar os dados" });
     }
