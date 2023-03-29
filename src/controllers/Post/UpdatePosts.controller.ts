@@ -26,10 +26,11 @@ class UpdatePostsController {
       });
       if (result) {
         res.status(200).json({ message: "Postagem atualizada!!" });
-      } else {
-        res.status(400).json({ message: "Postagem não encontrada!!" });
       }
-    } catch {
+    } catch (err: any) {
+      if (err.meta.cause && err.meta.cause == "Record to update not found.") {
+        return res.status(400).json({ message: "Postagem não encontrada!!" });
+      }
       res.status(500).json({ message: "Erro ao atualizar o post" });
     }
   }
