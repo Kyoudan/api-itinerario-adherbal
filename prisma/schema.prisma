@@ -21,19 +21,22 @@ model postcategories {
   id        Int      @id @default(autoincrement())
   name      String   @db.VarChar(255)
   createdAt DateTime @default(now())
+  posts     posts[]
 
   @@map("postcategories")
 }
 
 model posts {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(255)
-  slug      String   @unique @db.VarChar(255)
-  color     String   @db.VarChar(255)
-  finished  Boolean  @default(false)
-  userId    Int
-  createdAt DateTime @default(now())
-  users     users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id         Int            @id @default(autoincrement())
+  name       String         @db.VarChar(255)
+  slug       String         @unique @db.VarChar(255)
+  color      String         @db.VarChar(255)
+  finished   Boolean        @default(false)
+  userId     Int
+  createdAt  DateTime       @default(now())
+  categoryId Int
+  category   postcategories @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  users      users          @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("posts")
 }
