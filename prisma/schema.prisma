@@ -17,26 +17,26 @@ model activateAccounts {
   @@map("activateaccounts")
 }
 
-model postcategories {
+model postTags {
   id        Int      @id @default(autoincrement())
   name      String   @db.VarChar(255)
   createdAt DateTime @default(now())
   posts     posts[]
 
-  @@map("postcategories")
+  @@map("postTags")
 }
 
 model posts {
-  id         Int            @id @default(autoincrement())
-  name       String         @db.VarChar(255)
-  slug       String         @unique @db.VarChar(255)
-  color      String         @db.VarChar(255)
-  finished   Boolean        @default(false)
+  id         Int      @id @default(autoincrement())
+  name       String   @db.VarChar(255)
+  slug       String   @unique @db.VarChar(255)
+  color      String   @db.VarChar(255)
+  finished   Boolean  @default(false)
   userId     Int
-  createdAt  DateTime       @default(now())
-  categoryId Int
-  category   postcategories @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  users      users          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  postTagsId Int
+  postTags   postTags @relation(fields: [postTagsId], references: [id], onDelete: Cascade)
+  users      users    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("posts")
 }

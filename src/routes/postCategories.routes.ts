@@ -1,15 +1,15 @@
 import { Router } from "express";
-import CreatePostCategoriesController from "../controllers/PostCategories/CreatePostCategories.controller";
-import DeletePostCategoriesController from "../controllers/PostCategories/DeletePostCategories.controller";
-import FindAllPostCategoriesController from "../controllers/PostCategories/FindAllPostCategories.controller";
-import FindOnePostCategoriesController from "../controllers/PostCategories/FindOnePostCategories.controller";
-import UpdatePostCategoriesController from "../controllers/PostCategories/UpdatePostCategories.controller";
+import CreatePostTagsController from "../controllers/PostTags/CreatePostTags.controller";
+import DeletePostTagsController from "../controllers/PostTags/DeletePostTags.controller";
+import FindAllPostTagsController from "../controllers/PostTags/FindAllPostTags.controller";
+import FindOnePostTagsController from "../controllers/PostTags/FindOnePostTags.controller";
+import UpdatePostTagsController from "../controllers/PostTags/UpdatePostTags.controller";
 const routes = Router();
 
-routes.get("/postCategories", FindAllPostCategoriesController.handle);
-routes.get("/postCategories/:id", FindOnePostCategoriesController.handle);
-routes.post("/postCategories", CreatePostCategoriesController.handle);
-routes.put("/postCategories/:id", UpdatePostCategoriesController.handle);
-routes.delete("/postCategories/:id", DeletePostCategoriesController.handle);
+routes.get("/postTags", FindAllPostTagsController.handle);
+routes.get("/postTags/:id", FindOnePostTagsController.handle);
+routes.post("/postTags", CreatePostTagsController.handle);
+routes.put("/postTags/:id", UpdatePostTagsController.handle);
+routes.delete("/postTags/:id", DeletePostTagsController.handle);
 
 export default routes;

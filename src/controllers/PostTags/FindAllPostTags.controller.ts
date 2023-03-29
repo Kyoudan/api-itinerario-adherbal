@@ -14,7 +14,7 @@ class FindAllPostCategoriesController {
     const limit = parseInt(queryLimit);
 
     try {
-      const result = await prismaClient.postcategories.findMany({
+      const result = await prismaClient.postTags.findMany({
         skip: init,
         take: limit,
         select: {

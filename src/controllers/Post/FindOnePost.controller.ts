@@ -19,7 +19,7 @@ class FindOnePost {
           color: true,
           slug: true,
           createdAt: true,
-          category: {
+          postTags: {
             select: {
               id: true,
               name: true,

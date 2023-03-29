@@ -10,7 +10,7 @@ class FindOnePostCategoriesController {
       if (!queryId) return res.status(400).json({ message: "id invalido" });
       const id = parseInt(queryId);
       if (isNaN(id)) return res.status(400).json({ message: "id is NaN" });
-      const result = await prismaClient.postcategories.findFirst({
+      const result = await prismaClient.postTags.findFirst({
         where: {
           id,
         },

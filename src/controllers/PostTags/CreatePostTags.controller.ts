@@ -9,7 +9,7 @@ class CreatePostCategoriesController {
 
       if (!name) return res.status(400).json({ message: "Nome invalido!!" });
 
-      await prismaClient.postcategories.create({
+      await prismaClient.postTags.create({
         data: {
           name: name,
         },

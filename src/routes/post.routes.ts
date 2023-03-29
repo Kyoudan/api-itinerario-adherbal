@@ -1,5 +1,5 @@
 import { Router } from "express";
-import CreatePostController from "../controllers/Post/CreatePostScontroller";
+import CreatePostController from "../controllers/Post/CreatePostscontroller";
 import DeletePostsController from "../controllers/Post/DeletePosts.controller";
 import FindAllPostsController from "../controllers/Post/FindAllPosts.controller";
 import FindOnePostController from "../controllers/Post/FindOnePost.controller";
