@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import prismaClient from "../../database/prismaClient";
+import prismaClient from "../../../database/prismaClient";
 
 class DeletePostsController {
   async handle(req: Request, res: Response) {

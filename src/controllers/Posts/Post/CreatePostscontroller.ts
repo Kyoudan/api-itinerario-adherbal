@@ -1,6 +1,6 @@
 import { Response } from "express";
-import prismaClient from "../../database/prismaClient";
-import { UserType } from "../../types/UserType";
+import prismaClient from "../../../database/prismaClient";
+import { UserType } from "../../../types/UserType";
 
 class CreatePostController {
   async handle(req: UserType, res: Response) {
