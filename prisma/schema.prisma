@@ -7,51 +7,52 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model activateAccounts {
+model ActivateAccounts {
   id        Int      @id @default(autoincrement())
   token     String   @unique @db.VarChar(255)
   createdAt DateTime @default(now())
   userId    Int
-  users     users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  users     Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("activateaccounts")
 }
 
-model postTags {
+model PostTags {
   id        Int      @id @default(autoincrement())
   name      String   @db.VarChar(255)
   createdAt DateTime @default(now())
-  posts     posts[]
+  posts     Posts[]
 
   @@map("postTags")
 }
 
-model posts {
-  id         Int      @id @default(autoincrement())
-  name       String   @db.VarChar(255)
-  slug       String   @unique @db.VarChar(255)
-  color      String   @db.VarChar(255)
-  finished   Boolean  @default(false)
-  userId     Int
-  createdAt  DateTime @default(now())
-  postTagsId Int
-  postTags   postTags @relation(fields: [postTagsId], references: [id], onDelete: Cascade)
-  users      users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+model Posts {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(255)
+  description String   @db.VarChar(60)
+  slug        String   @unique @db.VarChar(255)
+  color       String   @db.VarChar(255)
+  finished    Boolean  @default(false)
+  userId      Int
+  createdAt   DateTime @default(now())
+  postTagsId  Int
+  postTags    PostTags @relation(fields: [postTagsId], references: [id], onDelete: Cascade)
+  users       Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("posts")
 }
 
-model recoverPasswords {
+model RecoverPasswords {
   id        Int      @id @default(autoincrement())
   token     String   @unique @db.VarChar(255)
   createdAt DateTime @default(now())
   userId    Int
-  users     users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  users     Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("recoverpasswords")
 }
 
-model users {
+model Users {
   id               Int                @id @default(autoincrement())
   name             String             @db.VarChar(255)
   description      String?            @db.VarChar(255)
@@ -59,9 +60,9 @@ model users {
   password         String             @db.VarChar(255)
   activated        Boolean            @default(false)
   createdAt        DateTime           @default(now())
-  activateAccounts activateAccounts[]
-  posts            posts[]
-  recoverPasswords recoverPasswords[]
+  activateAccounts ActivateAccounts[]
+  posts            Posts[]
+  recoverPasswords RecoverPasswords[]
 
   @@map("users")
 }

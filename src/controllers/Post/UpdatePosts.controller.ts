@@ -4,11 +4,13 @@ import prismaClient from "../../database/prismaClient";
 class UpdatePostsController {
   async handle(req: Request, res: Response) {
     try {
-      const { name, color } = req.body;
+      const { name, color, description } = req.body;
       const queryId = req.params.id;
 
       if (!name) return res.status(400).json({ message: "Nome invalido!!" });
       if (!color) return res.status(400).json({ message: "Cor invalida" });
+      if (!description)
+        return res.status(400).json({ message: "Descrição invalida" });
       const id = parseInt(queryId);
       if (isNaN(id)) return res.status(400).json({ message: "id is NaN" });
 
@@ -19,6 +21,7 @@ class UpdatePostsController {
           name,
           color,
           slug,
+          description,
         },
         where: {
           id,

@@ -5,7 +5,7 @@ import { UserType } from "../../types/UserType";
 class CreatePostController {
   async handle(req: UserType, res: Response) {
     try {
-      const { name, color, postTagsId } = req.body;
+      const { name, color, description, postTagsId } = req.body;
       const user = req.user;
 
       if (!name) return res.status(400).json({ message: "Nome invalido!!" });
@@ -13,6 +13,8 @@ class CreatePostController {
       if (!user) return res.status(500).json({ message: "Usuario invalido!!" });
       if (!postTagsId)
         return res.status(400).json({ message: "Categoria invalida" });
+      if (!description)
+        return res.status(400).json({ message: "Descrição invalida" });
 
       const slug = name.replace(/ /g, "_").toLowerCase();
 
@@ -20,6 +22,7 @@ class CreatePostController {
         data: {
           name,
           color,
+          description,
           slug,
           userId: user.id,
           postTagsId: postTagsId,

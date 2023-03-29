@@ -16,6 +16,7 @@ class FindOnePost {
         select: {
           id: true,
           name: true,
+          description: true,
           color: true,
           slug: true,
           createdAt: true,
