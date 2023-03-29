@@ -56,7 +56,7 @@ class CreateUserController {
 
       res.status(201).json({ message: "Usuario cadastrado com sucesso" });
     } catch (err: any) {
-      if (err.meta.target[0] == "email") {
+      if (err.meta.target[0] && err.meta.target[0] == "email") {
         return res.status(400).json({ message: "Email ja cadastrado" });
       }
       res.status(500).json({ message: "Erro ao cadastrar usuario" });
