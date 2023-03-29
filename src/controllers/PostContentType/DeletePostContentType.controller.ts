@@ -16,7 +16,7 @@ class DeletePostCategoriesController {
         },
       });
       if (result) {
-        res.status(200).json({ message: "Categoria apagada com sucesso!!" });
+        res.status(200).json({ message: "Tipo apagado com sucesso!!" });
       } else {
         res.status(400).json({ message: "Id não encontrado" });
       }

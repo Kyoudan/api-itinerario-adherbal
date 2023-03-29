@@ -23,7 +23,7 @@ class UpdatePostCategoriesController {
       if (result) {
         res.status(200).json(result);
       } else {
-        res.status(400).json({ message: "Categoria não encontrada" });
+        res.status(400).json({ message: "Tipo não encontrado" });
       }
     } catch {
       res.status(500).json({ message: "Erro ao atualizar a categoria!!" });

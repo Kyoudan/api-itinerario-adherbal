@@ -18,7 +18,7 @@ class FindOnePostCategoriesController {
       if (result) {
         res.status(200).json(result);
       } else {
-        res.status(404).json({ message: "Categoria não encontrada" });
+        res.status(404).json({ message: "Tipo não encontrado" });
       }
     } catch {
       res.status(500).json({ message: "Erro ao obter os dados" });
