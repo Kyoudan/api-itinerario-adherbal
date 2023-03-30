@@ -40,22 +40,25 @@ model PostContent {
   content           String          @db.Text
   PostContentTypeId Int
   PostContentType   PostContentType @relation(fields: [PostContentTypeId], references: [id], onDelete: Cascade)
+  PostsId           Int
+  Posts             Posts           @relation(fields: [PostsId], references: [id], onDelete: Cascade)
 
   @@map("postcontent")
 }
 
 model Posts {
-  id          Int      @id @default(autoincrement())
-  name        String   @db.VarChar(255)
-  description String   @db.VarChar(60)
-  slug        String   @unique @db.VarChar(255)
-  color       String   @db.VarChar(255)
-  finished    Boolean  @default(false)
+  id          Int           @id @default(autoincrement())
+  name        String        @db.VarChar(255)
+  description String        @db.VarChar(60)
+  slug        String        @unique @db.VarChar(255)
+  color       String        @db.VarChar(255)
+  finished    Boolean       @default(false)
   userId      Int
-  createdAt   DateTime @default(now())
+  createdAt   DateTime      @default(now())
   postTagsId  Int
-  postTags    PostTags @relation(fields: [postTagsId], references: [id], onDelete: Cascade)
-  users       Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  postTags    PostTags      @relation(fields: [postTagsId], references: [id], onDelete: Cascade)
+  users       Users         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  PostContent PostContent[]
 
   @@map("posts")
 }
