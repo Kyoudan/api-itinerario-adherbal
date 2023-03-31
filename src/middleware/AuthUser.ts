@@ -19,7 +19,10 @@ export default (req: UserType, res: Response, next: NextFunction) => {
     } else {
       res.status(401).json({ message: "Sessão expirada" });
     }
-  } catch {
+  } catch (err: jwt.JsonWebTokenError | any) {
+    if (err.message && err.message == "jwt expired") {
+      res.status(401).json({ message: "Token expirado!!" });
+    }
     res.status(500).json({ message: "Erro ao processar a rota" });
   }
 };

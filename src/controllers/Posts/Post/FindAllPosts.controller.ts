@@ -37,6 +37,18 @@ class FindAllPostCategoriesController {
               email: true,
             },
           },
+          PostContent: {
+            select: {
+              id: true,
+              content: true,
+              PostContentType: {
+                select: {
+                  id: true,
+                  name: true,
+                },
+              },
+            },
+          },
         },
       });
       res.status(200).json(result);

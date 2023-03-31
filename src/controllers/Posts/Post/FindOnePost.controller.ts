@@ -33,6 +33,18 @@ class FindOnePost {
               email: true,
             },
           },
+          PostContent: {
+            select: {
+              id: true,
+              content: true,
+              PostContentType: {
+                select: {
+                  id: true,
+                  name: true,
+                },
+              },
+            },
+          },
         },
       });
       if (result) {

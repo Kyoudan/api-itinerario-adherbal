@@ -13,14 +13,23 @@ class CreatePostContentController {
       if (!postId)
         return res.status(500).json({ message: "Postagem invalida!!" });
 
-      await prismaClient.postContent.create({
+      const result = await prismaClient.postContent.create({
         data: {
           content,
           PostContentTypeId: typeId,
           PostsId: postId,
         },
       });
-    } catch {
+      res.status(201).json(result);
+    } catch (err: any) {
+      if (err.meta.field_name.includes("PostContentTypeId")) {
+        return res
+          .status(400)
+          .json({ message: "Tipo do conteudo não existe!!" });
+      }
+      if (err.meta.field_name.includes("PostsId")) {
+        return res.status(400).json({ message: "Postagem não encontrada!!!" });
+      }
       res.status(500).json({ message: "Erro ao criar um conteudo!!" });
     }
   }
