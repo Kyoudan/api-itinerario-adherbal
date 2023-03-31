@@ -4,6 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
+		"build": "tsc",
+		"start": "node dist/server.js",
 		"test": "jest --passWithNoTests",
 		"test:watch": "npm run test --watch",
 		"dev": "tsnd --transpile-only --respawn ./src/server.ts",
