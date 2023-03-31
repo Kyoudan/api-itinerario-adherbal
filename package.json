@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"test": "jest --passWithNoTests",
+		"test:watch": "npm run test --watch",
 		"dev": "tsnd --transpile-only --respawn ./src/server.ts",
 		"dev:migrate": "npx prisma migrate dev",
 		"dev:studio": "npx prisma studio",
@@ -19,6 +20,7 @@
 		"@types/cors": "^2.8.13",
 		"@types/dotenv": "^8.2.0",
 		"@types/express": "^4.17.17",
+		"@types/jest": "^29.5.0",
 		"@types/jsonwebtoken": "^9.0.1",
 		"@types/node": "^18.15.10",
 		"@types/nodemailer": "^6.4.7",
@@ -28,8 +30,10 @@
 		"dotenv": "^16.0.3",
 		"eslint": "^8.36.0",
 		"eslint-config-prettier": "^8.8.0",
+		"jest": "^29.5.0",
 		"prettier": "^2.8.7",
 		"prisma": "^4.11.0",
+		"ts-jest": "^29.0.5",
 		"ts-node": "^10.9.1",
 		"ts-node-dev": "^2.0.0",
 		"typescript": "^5.0.2"
