@@ -25,12 +25,11 @@ class CreatePostContentController {
         },
       });
 
-      let order = 0;
+      console.log(orderedUser);
 
-      if (!orderedUser)
-        return res.status(400).json({ message: "Postagem não encontrada!!" });
+      let order = 1;
 
-      if (orderedUser.order) order = orderedUser.order + 1;
+      if (orderedUser && orderedUser?.order > 1) order = orderedUser.order + 1;
 
       console.log(order);
 
@@ -39,7 +38,7 @@ class CreatePostContentController {
           content,
           PostContentTypeId: typeId,
           PostsId: postId,
-          order: orderedUser.order + 1,
+          order: order,
         },
       });
       res.status(201).json(result);
