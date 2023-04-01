@@ -5,13 +5,14 @@ import UpdateAdminController from "@/controllers/Admin/UpdateAdmin.controller";
 import DeleteAdminController from "@/controllers/Admin/DeleteAdmin.controller";
 import FindAllAdminController from "@/controllers/Admin/FindAllAdmin.controller";
 import FindOneAdminController from "@/controllers/Admin/FindOneAdmin.controller";
+import AuthAdmin from "@/middleware/AuthAdmin";
 const routes = Router();
 
-routes.get("/admins", FindAllAdminController.handle)
-routes.get("/admins/:id", FindOneAdminController.handle)
-routes.post("/loginadmin", LoginAdminController.handle);
-routes.post("/admin", CreateAdminController.handle);
-routes.put("/admin", UpdateAdminController.handle);
-routes.delete("/admin", DeleteAdminController.handle);
+routes.get("/admins", AuthAdmin, FindAllAdminController.handle);
+routes.get("/admins/:id", AuthAdmin, FindOneAdminController.handle);
+routes.post("/loginadmin", AuthAdmin, LoginAdminController.handle);
+routes.post("/admin", AuthAdmin, CreateAdminController.handle);
+routes.put("/admin", AuthAdmin, UpdateAdminController.handle);
+routes.delete("/admin", AuthAdmin, DeleteAdminController.handle);
 
 export default routes;
