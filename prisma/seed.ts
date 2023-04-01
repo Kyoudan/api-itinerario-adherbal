@@ -82,5 +82,30 @@ async function seedPostType() {
   }
 }
 
+async function seedPostTags() {
+  try {
+    const types = [
+      { name: "Saúde" },
+      { name: "Tecnologia" },
+      { name: "Arte" },
+      { name: "Política" },
+      { name: "Economia" },
+      { name: "Preconceito" },
+      { name: "Cultura" },
+    ];
+
+    await prismaClient.postContentType.createMany({
+      data: types,
+    });
+
+    console.log("Criado 2");
+  } catch (err: any) {
+    console.log(err);
+    console.log("Erro do codigo 2 !!");
+  }
+}
+
 seedUser();
 seedAdm();
+seedPostType();
+seedPostTags();
