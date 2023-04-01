@@ -15,7 +15,7 @@ export default (
     text: `${text}`,
   })
     .then(() => {
-      return console.log("Enviado!!");
+      return;
     })
     .catch((err) => {
       return console.log("Erro ao enviar", err);
