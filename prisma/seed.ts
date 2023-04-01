@@ -62,5 +62,25 @@ async function seedAdm() {
   }
 }
 
+async function seedPostType() {
+  try {
+    const types = [
+      { name: "image" },
+      { name: "text" },
+      { name: "title" },
+      { name: "label" },
+    ];
+
+    await prismaClient.postContentType.createMany({
+      data: types,
+    });
+
+    console.log("Criado 2");
+  } catch (err: any) {
+    console.log(err);
+    console.log("Erro do codigo 2 !!");
+  }
+}
+
 seedUser();
 seedAdm();
