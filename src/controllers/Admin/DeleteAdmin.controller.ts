@@ -1,7 +1,7 @@
-import { UserType } from "@/types/UserType";
 import { Response } from "express";
 import { compareSync } from "bcrypt";
-import prismaClient from "@/database/prismaClient";
+import prismaClient from "../../database/prismaClient";
+import { UserType } from "../../types/UserType";
 
 class DeleteAdminController {
   async handle(req: UserType, res: Response) {

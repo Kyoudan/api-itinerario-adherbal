@@ -3,7 +3,7 @@ import FindAllFeaturedPostsController from "../../controllers/FeaturedPosts/Find
 import CreateFeaturedPostsController from "../../controllers/FeaturedPosts/CreateFeaturedPosts.controller";
 import UpdatedFeaturedPostsController from "../../controllers/FeaturedPosts/UpdatedFeaturedPosts.controller";
 import DeleteFeaturedPostsController from "../../controllers/FeaturedPosts/DeleteFeaturedPosts.controller";
-import AuthAdmin from "@/middleware/AuthAdmin";
+import AuthAdmin from "../../middleware/AuthAdmin";
 const routes = Router();
 
 routes.get("/featuredposts", AuthAdmin, FindAllFeaturedPostsController.handle);

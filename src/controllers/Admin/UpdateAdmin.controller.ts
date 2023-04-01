@@ -1,5 +1,5 @@
-import prismaClient from "@/database/prismaClient";
-import { UserType } from "@/types/UserType";
+import prismaClient from "../../database/prismaClient";
+import { UserType } from "../../types/UserType";
 import { Response } from "express";
 
 class UpdateAdminController {
