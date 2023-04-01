@@ -44,6 +44,7 @@ model PostContentType {
 model PostContent {
   id                Int             @id @default(autoincrement())
   content           String          @db.Text
+  order             Int             @default(0)
   PostContentTypeId Int
   PostContentType   PostContentType @relation(fields: [PostContentTypeId], references: [id], onDelete: Cascade)
   PostsId           Int
@@ -59,11 +60,11 @@ model Posts {
   slug          String          @unique @db.VarChar(255)
   color         String          @db.VarChar(255)
   finished      Boolean         @default(false)
-  userId        Int
+  adminId       Int
   createdAt     DateTime        @default(now())
   postTagsId    Int
   postTags      PostTags        @relation(fields: [postTagsId], references: [id], onDelete: Cascade)
-  users         Users           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  users         Admins          @relation(fields: [adminId], references: [id], onDelete: Cascade)
   PostContent   PostContent[]
   FeaturedPosts FeaturedPosts[]
 
@@ -74,8 +75,10 @@ model RecoverPasswords {
   id        Int      @id @default(autoincrement())
   token     String   @unique @db.VarChar(255)
   createdAt DateTime @default(now())
-  userId    Int
-  users     Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int?
+  users     Users?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  adminId   Int?
+  Admin     Admins?  @relation(fields: [adminId], references: [id], onDelete: Cascade)
 
   @@map("recoverpasswords")
 }
@@ -89,8 +92,19 @@ model Users {
   activated        Boolean            @default(false)
   createdAt        DateTime           @default(now())
   activateAccounts ActivateAccounts[]
-  posts            Posts[]
   recoverPasswords RecoverPasswords[]
 
   @@map("users")
+}
+
+model Admins {
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(255)
+  email            String             @unique @db.VarChar(255)
+  password         String             @db.VarChar(255)
+  createdAt        DateTime           @default(now())
+  posts            Posts[]
+  recoverPasswords RecoverPasswords[]
+
+  @@map("admins")
 }

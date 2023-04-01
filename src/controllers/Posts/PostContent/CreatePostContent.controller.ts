@@ -13,11 +13,33 @@ class CreatePostContentController {
       if (!postId)
         return res.status(500).json({ message: "Postagem invalida!!" });
 
+      const orderedUser = await prismaClient.postContent.findFirst({
+        where: {
+          PostsId: postId,
+        },
+        select: {
+          order: true,
+        },
+        orderBy: {
+          order: "desc",
+        },
+      });
+
+      let order = 0;
+
+      if (!orderedUser)
+        return res.status(400).json({ message: "Postagem não encontrada!!" });
+
+      if (orderedUser.order) order = orderedUser.order + 1;
+
+      console.log(order);
+
       const result = await prismaClient.postContent.create({
         data: {
           content,
           PostContentTypeId: typeId,
           PostsId: postId,
+          order: orderedUser.order + 1,
         },
       });
       res.status(201).json(result);

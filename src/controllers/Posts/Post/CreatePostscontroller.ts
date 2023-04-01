@@ -24,7 +24,7 @@ class CreatePostController {
           color,
           description,
           slug,
-          userId: user.id,
+          adminId: user.id,
           postTagsId: postTagsId,
         },
       });

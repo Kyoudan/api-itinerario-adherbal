@@ -4,12 +4,12 @@ import DeletePostsController from "../../controllers/Posts/Post/DeletePosts.cont
 import FindAllPostsController from "../../controllers/Posts/Post/FindAllPosts.controller";
 import FindOnePostController from "../../controllers/Posts/Post/FindOnePost.controller";
 import UpdatePostsController from "../../controllers/Posts/Post/UpdatePosts.controller";
-import AuthUser from "../../middleware/AuthUser";
+import AuthAdmin from "../../middleware/AuthAdmin";
 const routes = Router();
 
 routes.get("/post/:id", FindOnePostController.handle);
 routes.get("/post", FindAllPostsController.handle);
-routes.post("/post", AuthUser, CreatePostController.handle);
+routes.post("/post", AuthAdmin, CreatePostController.handle);
 routes.put("/post/:id", UpdatePostsController.handle);
 routes.delete("/post/:id", DeletePostsController.handle);
 
