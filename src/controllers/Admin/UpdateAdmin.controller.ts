@@ -9,6 +9,7 @@ class UpdateAdminController {
       const user = req.user;
 
       if (!user) return res.status(400).json({ message: "Adm não encontrado" });
+      
 
       const lowerEmail = email.toLowerCase();
 
