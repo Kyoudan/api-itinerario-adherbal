@@ -25,21 +25,17 @@ class CreatePostContentController {
         },
       });
 
-      let order = 0;
+      let order = 1;
 
-      if (!orderedUser)
-        return res.status(400).json({ message: "Postagem não encontrada!!" });
-
-      if (orderedUser.order) order = orderedUser.order + 1;
-
-      console.log(order);
+      if (!orderedUser) order = 1;
+      else if (orderedUser) order = orderedUser.order + 1;
 
       const result = await prismaClient.postContent.create({
         data: {
           content,
           PostContentTypeId: typeId,
           PostsId: postId,
-          order: orderedUser.order + 1,
+          order: order,
         },
       });
       res.status(201).json(result);

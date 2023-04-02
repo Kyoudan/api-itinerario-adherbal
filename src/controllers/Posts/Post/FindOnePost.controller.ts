@@ -37,12 +37,16 @@ class FindOnePost {
             select: {
               id: true,
               content: true,
+              order: true,
               PostContentType: {
                 select: {
                   id: true,
                   name: true,
                 },
               },
+            },
+            orderBy: {
+              order: "asc",
             },
           },
         },
