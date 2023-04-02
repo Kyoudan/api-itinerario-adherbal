@@ -94,7 +94,7 @@ async function seedPostTags() {
       { name: "Cultura" },
     ];
 
-    await prismaClient.postContentType.createMany({
+    await prismaClient.postTags.createMany({
       data: types,
     });
 

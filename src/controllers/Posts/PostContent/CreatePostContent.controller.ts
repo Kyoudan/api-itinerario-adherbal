@@ -25,13 +25,10 @@ class CreatePostContentController {
         },
       });
 
-      console.log(orderedUser);
-
       let order = 1;
 
-      if (orderedUser && orderedUser?.order > 1) order = orderedUser.order + 1;
-
-      console.log(order);
+      if (!orderedUser) order = 1;
+      else if (orderedUser) order = orderedUser.order + 1;
 
       const result = await prismaClient.postContent.create({
         data: {

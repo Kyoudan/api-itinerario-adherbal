@@ -10,7 +10,7 @@ const routes = Router();
 
 routes.get("/admins", AuthAdmin, FindAllAdminController.handle);
 routes.get("/admins/:id", AuthAdmin, FindOneAdminController.handle);
-routes.post("/loginadmin", AuthAdmin, LoginAdminController.handle);
+routes.post("/loginadmin", LoginAdminController.handle);
 routes.post("/admin", AuthAdmin, CreateAdminController.handle);
 routes.put("/admin", AuthAdmin, UpdateAdminController.handle);
 routes.delete("/admin", AuthAdmin, DeleteAdminController.handle);
