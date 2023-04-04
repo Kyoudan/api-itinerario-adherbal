@@ -1,7 +1,7 @@
 {
   "name": "back-end",
   "version": "1.0.0",
-  "description": "",
+  "description": "API do itinerario 'se liga na midia' dos alunos da escola PEI Adherbal de Paula Ferreira localizada em Itapetininga - SP",
   "main": "index.js",
   "prisma": {
     "seed": "tsnd ./prisma/seed.ts"
@@ -12,6 +12,7 @@
     "test": "set DATABASE_URL=postgresql://postgres:postgres@localhost:5432/Itinerario-Testes?schema=public && jest --passWithNoTests",
     "test:migrate": "set DATABASE_URL=postgresql://postgres:postgres@localhost:5432/Itinerario-Testes?schema=public && npx prisma migrate dev",
     "test:seed": "set DATABASE_URL=postgresql://postgres:postgres@localhost:5432/Itinerario-Testes?schema=public && npx prisma db seed",
+    "test:studio": "set DATABASE_URL=postgresql://postgres:postgres@localhost:5432/Itinerario-Testes?schema=public && npx prisma studio",
     "test:watch": "npm run test --watch",
     "dev": "tsnd --transpile-only --respawn ./src/server.ts",
     "dev:migrate": "npx prisma migrate dev",
@@ -20,8 +21,8 @@
     "dev:seed": "npx prisma db seed"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Gustavo Rafael Cardilho",
+  "license": "",
   "devDependencies": {
     "@prisma/client": "^4.11.0",
     "@types/bcrypt": "^5.0.0",
