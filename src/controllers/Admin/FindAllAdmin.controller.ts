@@ -13,7 +13,8 @@ class FindAllAdmin {
     const limit = parseInt(queryLimit);
 
     try {
-      const result = await prismaClient.admins.findMany({
+      const count = await prismaClient.admins.count();
+      const data = await prismaClient.admins.findMany({
         skip: init,
         take: limit,
         select: {
@@ -23,7 +24,7 @@ class FindAllAdmin {
           createdAt: true,
         },
       });
-      res.status(200).json(result);
+      res.status(200).json({ data, count });
     } catch {
       res.status(500).json({ message: "Erro ao buscar os dados" });
     }

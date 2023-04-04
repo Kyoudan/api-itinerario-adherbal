@@ -9,7 +9,8 @@ class FindOneContentController {
       if (!queryId) return res.status(400).json({ message: "id invalido" });
       const id = parseInt(queryId);
       if (isNaN(id)) return res.status(400).json({ message: "id is NaN" });
-      const result = await prismaClient.postContent.findFirst({
+      const count = await prismaClient.postContent.count();
+      const data = await prismaClient.postContent.findFirst({
         where: {
           id,
         },
@@ -26,8 +27,8 @@ class FindOneContentController {
           },
         },
       });
-      if (result) {
-        res.status(200).json(result);
+      if (data) {
+        res.status(200).json({ data, count });
       } else {
         res
           .status(404)

@@ -14,7 +14,8 @@ class FindAllPostCategoriesController {
     const limit = parseInt(queryLimit);
 
     try {
-      const result = await prismaClient.postTags.findMany({
+      const count = await prismaClient.postTags.count();
+      const data = await prismaClient.postTags.findMany({
         skip: init,
         take: limit,
         select: {
@@ -23,7 +24,7 @@ class FindAllPostCategoriesController {
           createdAt: true,
         },
       });
-      res.status(200).json(result);
+      res.status(200).json({ data, count });
     } catch {
       res.status(500).json({ message: "Erro ao buscar os dados" });
     }

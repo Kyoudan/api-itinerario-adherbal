@@ -9,7 +9,8 @@ class FindOnePost {
       if (!queryId) return res.status(400).json({ message: "id invalido" });
       const id = parseInt(queryId);
       if (isNaN(id)) return res.status(400).json({ message: "id is NaN" });
-      const result = await prismaClient.posts.findFirst({
+      const count = await prismaClient.posts.count();
+      const data = await prismaClient.posts.findFirst({
         where: {
           id,
         },
@@ -51,8 +52,8 @@ class FindOnePost {
           },
         },
       });
-      if (result) {
-        res.status(200).json(result);
+      if (data) {
+        res.status(200).json({ data, count });
       } else {
         res.status(404).json({ message: "Categoria não encontrada" });
       }

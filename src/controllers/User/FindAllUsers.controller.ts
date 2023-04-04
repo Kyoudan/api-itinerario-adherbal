@@ -13,7 +13,8 @@ class FindAllUsersController {
     const limit = parseInt(queryLimit);
 
     try {
-      const result = await prismaClient.users.findMany({
+      const count = await prismaClient.users.count();
+      const data = await prismaClient.users.findMany({
         skip: init,
         take: limit,
         select: {
@@ -24,7 +25,7 @@ class FindAllUsersController {
           createdAt: true,
         },
       });
-      res.status(200).json(result);
+      res.status(200).json({ data, count });
     } catch {
       res.status(500).json({ message: "Erro ao buscar os dados" });
     }

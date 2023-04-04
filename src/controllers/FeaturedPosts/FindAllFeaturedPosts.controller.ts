@@ -13,7 +13,8 @@ class FindAllFeaturedPosts {
     const limit = parseInt(queryLimit);
 
     try {
-      const result = await prismaClient.featuredPosts.findMany({
+      const count = await prismaClient.featuredPosts.count();
+      const data = await prismaClient.featuredPosts.findMany({
         skip: init,
         take: limit,
         select: {
@@ -53,7 +54,7 @@ class FindAllFeaturedPosts {
           },
         },
       });
-      res.status(200).json(result);
+      res.status(200).json({ data, count });
     } catch {
       res.status(500).json({ message: "Erro ao buscar os dados" });
     }
