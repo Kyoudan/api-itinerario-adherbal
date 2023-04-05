@@ -4,6 +4,10 @@
     <img src="https://cdn.discordapp.com/attachments/863861085471244288/1092152340875841656/WhatsApp_Image_2023-04-02_at_15.06.33-PhotoRoom.png-PhotoRoom.png" alt="teste" width="200" height="200">
 </div>
 
+![slnm-version](https://img.shields.io/badge/version-v0.0.0-red.svg)
+
+#
+
 <p>Guia para a configuração da api do itinerario formativo</p>
 
 <h1>Desenvolvimento: </h1>
@@ -112,6 +116,7 @@ $ npm run test:studio
 
 <a href="https://github.com/Kyoudan" target="_blank"><img src="
 https://img.shields.io/badge/-Github-0d1117?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a>
+
 <a href="https://www.instagram.com/guuh_raff/" target="_blank"><img src="https://img.shields.io/badge/-Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white" target="_blank"></a>
 
 
