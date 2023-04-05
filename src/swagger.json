@@ -1,0 +1,18 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Itinerario Formativo: Se liga na mídia",
+    "description": "Documentação da api do itinerario formativo: se liga na midia realizado pelos alunos da escola Adherbal de Paula ferreira, localizada em Itapetininga - SP",
+    "version": "1.0.0",
+    "contact": {
+      "email": "gustavorafael@gmail.com"
+    }
+  },
+
+  "servers": [
+    {
+      "url": "http://localhost:3000/",
+      "description": "Rota de desenvolvimento"
+    }
+  ]
+}
