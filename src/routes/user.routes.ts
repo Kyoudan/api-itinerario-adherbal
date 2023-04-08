@@ -7,12 +7,14 @@ import FindAllUsersController from "../controllers/User/FindAllUsers.controller"
 import FindOneUserController from "../controllers/User/FindOneUser.controller";
 import UpdateUserController from "../controllers/User/UpdateUser.controller";
 import AuthUser from "../middleware/AuthUser";
+import VerifyTokenUserController from "../controllers/User/VerifyTokenUser.controller";
 const routes = Router();
 
 routes.get("/users", FindAllUsersController.handle);
 routes.get("/users/:id", FindOneUserController.handle);
 routes.post("/users", CreateUserController.handle);
 routes.post("/login", LoginUserController.handle);
+routes.post("/verifytoken", VerifyTokenUserController.handle);
 routes.put("/users", AuthUser, UpdateUserController.handle);
 routes.delete("/users", AuthUser, DeleteuserController.handle);
 routes.get("/activateAccount", ActiveAccountController.handle);
