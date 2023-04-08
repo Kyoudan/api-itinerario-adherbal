@@ -13,11 +13,11 @@ class VerifyTokenUserController {
       if (!token)
         return res.status(400).json({ message: "Token indefinido!!" });
 
-      jwt.verify(token, jwt_secret);
+      const user = jwt.verify(token, jwt_secret);
 
-      res.status(200).json(true);
+      res.status(200).json(user);
     } catch {
-      res.status(401).json(false);
+      res.status(401).json({ message: "Não autorizado!!" });
     }
   }
 }

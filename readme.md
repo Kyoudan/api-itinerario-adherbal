@@ -115,7 +115,7 @@ $ npm run test:studio
 # Com amor: Gustavo Cardilho 💖 
 
 <a href="https://github.com/Kyoudan" target="_blank"><img src="
-https://img.shields.io/badge/-Github-0d1117?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a>
+https://img.shields.io/badge/-Github-%230d1117?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a>
 
 <a href="https://www.instagram.com/guuh_raff/" target="_blank"><img src="https://img.shields.io/badge/-Instagram-%23E4405F?style=for-the-badge&logo=instagram&logoColor=white" target="_blank"></a>
 
