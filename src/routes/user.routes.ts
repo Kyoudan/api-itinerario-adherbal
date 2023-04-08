@@ -10,7 +10,7 @@ import AuthUser from "../middleware/AuthUser";
 import VerifyTokenUserController from "../controllers/User/VerifyTokenUser.controller";
 const routes = Router();
 
-routes.get("/users", FindAllUsersController.handle);
+routes.get("/users", AuthUser, FindAllUsersController.handle);
 routes.get("/users/:id", FindOneUserController.handle);
 routes.post("/users", CreateUserController.handle);
 routes.post("/login", LoginUserController.handle);

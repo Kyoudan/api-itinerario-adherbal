@@ -8,9 +8,13 @@ const jwt_secret = process.env.JWT_SECRET as string;
 
 export default (req: UserType, res: Response, next: NextFunction) => {
   try {
-    const token = req.headers.authorization;
+    let token = req.headers.authorization;
 
     if (!token) return res.status(401).json({ message: "Token invalido!!" });
+    if (token.indexOf(" ") >= 0) {
+      const Bearer = token.split(" ");
+      token = Bearer[1];
+    }
 
     const verifyToken = jwt.verify(token, jwt_secret);
     if (verifyToken) {
@@ -20,9 +24,13 @@ export default (req: UserType, res: Response, next: NextFunction) => {
       res.status(401).json({ message: "Sessão expirada" });
     }
   } catch (err: jwt.JsonWebTokenError | any) {
-    if (err.message && err.message == "jwt expired") {
+    if (
+      (err.message && err.message == "jwt expired") ||
+      err.message == "invalid signature"
+    ) {
       res.status(401).json({ message: "Token expirado!!" });
     }
+
     res.status(500).json({ message: "Erro ao processar a rota" });
   }
 };
