@@ -20,10 +20,10 @@ class FindAllPostCategoriesController {
         take: limit,
         select: {
           id: true,
+          uuid: true,
           name: true,
           description: true,
           color: true,
-          slug: true,
           createdAt: true,
           postTags: {
             select: {

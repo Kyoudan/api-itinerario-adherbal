@@ -14,13 +14,10 @@ class UpdatePostsController {
       const id = parseInt(queryId);
       if (isNaN(id)) return res.status(400).json({ message: "id is NaN" });
 
-      const slug = name.toLowerCase().replace(/ /g, "_");
-
       const result = await prismaClient.posts.update({
         data: {
           name,
           color,
-          slug,
           description,
         },
         where: {

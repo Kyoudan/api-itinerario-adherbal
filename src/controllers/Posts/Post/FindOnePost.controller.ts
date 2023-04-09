@@ -4,22 +4,20 @@ import prismaClient from "../../../database/prismaClient";
 class FindOnePost {
   async handle(req: Request, res: Response) {
     try {
-      const queryId = req.params.id;
+      const {uuid} = req.params;
 
-      if (!queryId) return res.status(400).json({ message: "id invalido" });
-      const id = parseInt(queryId);
-      if (isNaN(id)) return res.status(400).json({ message: "id is NaN" });
+      if (!uuid) return res.status(400).json({ message: "id invalido" });
       const count = await prismaClient.posts.count();
       const data = await prismaClient.posts.findFirst({
         where: {
-          id,
+          uuid,
         },
         select: {
           id: true,
+          uuid: true,
           name: true,
           description: true,
           color: true,
-          slug: true,
           createdAt: true,
           postTags: {
             select: {

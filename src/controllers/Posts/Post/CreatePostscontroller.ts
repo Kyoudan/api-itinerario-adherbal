@@ -16,16 +16,11 @@ class CreatePostController {
       if (!description)
         return res.status(400).json({ message: "Descrição invalida" });
 
-      const slug = name.replace(/ /g, "_").toLowerCase();
-
-      console.log(postTagsId);
-
       await prismaClient.posts.create({
         data: {
           name,
           color,
           description,
-          slug,
           adminId: user.id,
           postTagsId: postTagsId,
         },

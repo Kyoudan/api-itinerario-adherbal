@@ -5,10 +5,10 @@ import FindAllPostsController from "../../controllers/Posts/Post/FindAllPosts.co
 import FindOnePostController from "../../controllers/Posts/Post/FindOnePost.controller";
 import UpdatePostsController from "../../controllers/Posts/Post/UpdatePosts.controller";
 import AuthAdmin from "../../middleware/AuthAdmin";
-import FindOnePostBySlugController from "../../controllers/Posts/Post/FindOnePostBySlug.controller";
+import FindOnePostBySlugController from "../../controllers/Posts/Post/FindOnePostByName.controller";
 const routes = Router();
 
-routes.get("/post/:id", FindOnePostController.handle);
+routes.get("/post/:uuid", FindOnePostController.handle);
 routes.get("/post", FindAllPostsController.handle);
 routes.get("/posts/slug", FindOnePostBySlugController.handle);
 routes.post("/post", AuthAdmin, CreatePostController.handle);

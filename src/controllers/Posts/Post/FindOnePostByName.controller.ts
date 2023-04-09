@@ -1,7 +1,7 @@
 import prismaClient from "../../../database/prismaClient";
 import { Request, Response } from "express";
 
-class FindOnePostBySlugController {
+class FindOnePostByNameController {
   async handle(req: Request, res: Response) {
     try {
       const { q } = req.query;
@@ -10,21 +10,18 @@ class FindOnePostBySlugController {
       if (!q || typeof q != "string")
         return res.status(400).json({ message: "Query invalida!!" });
 
-      const slug = q.replace(/ /g, "_").toLowerCase();
-      console.log(slug);
-
       const count = await prismaClient.posts.count({
         where: {
-          slug: {
-            contains: slug,
+          name: {
+            contains: q,
           },
         },
       });
 
       const data = await prismaClient.posts.findMany({
         where: {
-          slug: {
-            contains: slug,
+          name: {
+            contains: q,
           },
         },
       });
@@ -36,4 +33,4 @@ class FindOnePostBySlugController {
   }
 }
 
-export default new FindOnePostBySlugController();
+export default new FindOnePostByNameController();
