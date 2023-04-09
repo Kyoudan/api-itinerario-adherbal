@@ -18,6 +18,8 @@ class CreatePostController {
 
       const slug = name.replace(/ /g, "_").toLowerCase();
 
+      console.log(postTagsId);
+
       await prismaClient.posts.create({
         data: {
           name,
@@ -34,10 +36,21 @@ class CreatePostController {
       if (err.meta.target && err.meta.target[0] == "slug") {
         return res.status(400).json({ message: "Nome ja cadastrado" });
       }
-      if (err.meta.field_name.includes("categoryId")) {
+
+      if (err.meta.field_name && err.meta.field_name.includes("categoryId")) {
         return res.status(400).json({ message: "Categoria não existente" });
       }
 
+      if (
+        err.message &&
+        err.message.includes(
+          "The provided value for the column is too long for the column's type. Column: (not available)"
+        )
+      ) {
+        return res.status(400).json({
+          message: "Texto muito longo!!",
+        });
+      }
       res.status(500).json({ message: "Erro ao criar postagem!!" });
     }
   }
