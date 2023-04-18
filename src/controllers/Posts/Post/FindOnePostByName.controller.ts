@@ -24,6 +24,16 @@ class FindOnePostByNameController {
             contains: q,
           },
         },
+        select: {
+          name: true,
+          description: true,
+          uuid: true,
+          postTags: {
+            select: {
+              name: true,
+            },
+          },
+        },
       });
 
       res.status(200).json({ data, count });

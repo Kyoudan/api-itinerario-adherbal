@@ -67,7 +67,7 @@ async function seedPostType() {
     const types = [
       { name: "image" },
       { name: "text" },
-      { name: "title" },
+      { name: "textBold" },
       { name: "label" },
     ];
 
