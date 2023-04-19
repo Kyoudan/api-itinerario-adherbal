@@ -17,6 +17,7 @@ class FindOneContentController {
         select: {
           id: true,
           content: true,
+          type: true,
           Posts: {
             select: {
               id: true,

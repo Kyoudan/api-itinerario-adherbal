@@ -4,6 +4,8 @@ import { Request, Response } from "express";
 interface IContent {
   id: number;
   text: string;
+  size: string;
+  type: string;
 }
 
 class UpdateAllPostController {
@@ -34,26 +36,29 @@ class UpdateAllPostController {
         },
       });
 
-      try {
-        content.forEach(async (item: IContent) => {
-          if (item && item.id) {
-            await prismaClient.postContent.update({
-              where: {
-                id: item.id,
-              },
-              data: {
-                content: item.text,
-              },
+      content.forEach(async (item: IContent) => {
+        if (item) {
+          if (item.type == "image" && item.size)
+            return res.status(400).json({
+              message: "A é possível definir tamanho para a imagem!!",
             });
-          }
-        });
 
-        res.status(200).json({ message: "Postagem atualizada com sucesso!!" });
-      } catch {
-        res
-          .status(500)
-          .json({ message: "Erro ao atualizar o conteudo da postagem!!" });
-      }
+          await prismaClient.postContent.update({
+            where: {
+              id: item.id,
+            },
+            data: {
+              content: item.text,
+              type: item.type,
+              size: item.size,
+            },
+          });
+        }
+      });
+
+      return res
+        .status(200)
+        .json({ message: "Postagem atualizada com sucesso!!" });
     } catch {
       res.status(500).json({ message: "Erro ao atualizar a postagem" });
     }

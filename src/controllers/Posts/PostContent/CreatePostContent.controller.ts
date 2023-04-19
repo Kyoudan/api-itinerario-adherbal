@@ -4,14 +4,22 @@ import prismaClient from "../../../database/prismaClient";
 class CreatePostContentController {
   async handle(req: Request, res: Response) {
     try {
-      const { content, typeId, postId } = req.body;
+      const { content, type, postId, size } = req.body;
 
       if (!content)
         return res.status(400).json({ message: "Conteudo invalido!!" });
-      if (!typeId)
+      if (!type)
         return res.status(400).json({ message: "Tipo do conteudo invalido!!" });
       if (!postId)
         return res.status(500).json({ message: "Postagem invalida!!" });
+      if (!size)
+        return res.status(400).json({ message: "Tamanho invalido!!" });
+
+      if (type == "image" && size) {
+        return res.status(400).json({
+          message: "Não é possível definir um tamanho para a imagem!!",
+        });
+      }
 
       const orderedUser = await prismaClient.postContent.findFirst({
         where: {
@@ -33,7 +41,8 @@ class CreatePostContentController {
       const result = await prismaClient.postContent.create({
         data: {
           content,
-          PostContentTypeId: typeId,
+          type,
+          size,
           PostsId: postId,
           order: order,
         },

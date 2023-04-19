@@ -4,7 +4,7 @@ import prismaClient from "../../../database/prismaClient";
 class FindOnePost {
   async handle(req: Request, res: Response) {
     try {
-      const {uuid} = req.params;
+      const { uuid } = req.params;
 
       if (!uuid) return res.status(400).json({ message: "id invalido" });
       const count = await prismaClient.posts.count();
@@ -37,12 +37,8 @@ class FindOnePost {
               id: true,
               content: true,
               order: true,
-              PostContentType: {
-                select: {
-                  id: true,
-                  name: true,
-                },
-              },
+              type: true,
+              size: true,
             },
             orderBy: {
               order: "asc",

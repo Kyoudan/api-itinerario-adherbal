@@ -32,23 +32,14 @@ model PostTags {
   @@map("posttags")
 }
 
-model PostContentType {
-  id          Int           @id @default(autoincrement())
-  name        String        @db.VarChar(255)
-  createdAt   DateTime      @default(now())
-  PostContent PostContent[]
-
-  @@map("postcontenttype")
-}
-
 model PostContent {
-  id                Int             @id @default(autoincrement())
-  content           String          @db.Text
-  order             Int             @default(0)
-  PostContentTypeId Int
-  PostContentType   PostContentType @relation(fields: [PostContentTypeId], references: [id], onDelete: Cascade)
-  PostsId           Int
-  Posts             Posts           @relation(fields: [PostsId], references: [id], onDelete: Cascade)
+  id      Int    @id @default(autoincrement())
+  content String @db.Text
+  type    String @db.Text
+  size    Int
+  order   Int    @default(0)
+  PostsId Int
+  Posts   Posts  @relation(fields: [PostsId], references: [id], onDelete: Cascade)
 
   @@map("postcontent")
 }

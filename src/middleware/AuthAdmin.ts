@@ -17,12 +17,12 @@ export default (req: UserType, res: Response, next: NextFunction) => {
       req.user = verifyToken as jwt_payload;
       next();
     } else {
-      res.status(401).json({ message: "Sessão expirada" });
+      return res.status(401).json({ message: "Sessão expirada" });
     }
   } catch (err: jwt.JsonWebTokenError | any) {
     if (err.message && err.message == "jwt expired") {
-      res.status(401).json({ message: "Token expirado!!" });
+      return res.status(401).json({ message: "Token expirado!!" });
     }
-    res.status(500).json({ message: "Erro ao processar a rota" });
+    return res.status(500).json({ message: "Erro ao processar a rota" });
   }
 };
