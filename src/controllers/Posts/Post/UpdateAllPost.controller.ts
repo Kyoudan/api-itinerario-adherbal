@@ -38,15 +38,17 @@ class UpdateAllPostController {
 
       content.forEach(async (item: IContent) => {
         if (item) {
+          console.log(item);
           if (item.type == "image" && item.size)
             return res.status(400).json({
               message: "A é possível definir tamanho para a imagem!!",
             });
 
-          if (typeof item.size != "number")
+          if (typeof item.size != "number" && typeof item.size != "object") {
             return res.status(400).json({
               message: "Tamanho não é um numero!!",
             });
+          }
 
           await prismaClient.postContent.update({
             where: {
@@ -60,10 +62,9 @@ class UpdateAllPostController {
           });
         }
       });
-
       return res
-        .status(200)
-        .json({ message: "Postagem atualizada com sucesso!!" });
+      .status(200)
+      .json({ message: "Postagem atualizada com sucesso!!" });
     } catch {
       res.status(500).json({ message: "Erro ao atualizar a postagem" });
     }
