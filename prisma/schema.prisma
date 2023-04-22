@@ -36,7 +36,7 @@ model PostContent {
   id      Int    @id @default(autoincrement())
   content String @db.Text
   type    String @db.Text
-  size    Int
+  size    Float?
   order   Int    @default(0)
   PostsId Int
   Posts   Posts  @relation(fields: [PostsId], references: [id], onDelete: Cascade)
@@ -52,6 +52,7 @@ model Posts {
   description   String          @db.VarChar(100)
   color         String          @db.VarChar(255)
   finished      Boolean         @default(false)
+  author        String
   adminId       Int
   createdAt     DateTime        @default(now())
   postTagsId    Int
@@ -91,6 +92,7 @@ model Users {
 
 model Admins {
   id               Int                @id @default(autoincrement())
+  image            String?            @db.Text()
   name             String             @db.VarChar(255)
   email            String             @unique @db.VarChar(255)
   password         String             @db.VarChar(255)

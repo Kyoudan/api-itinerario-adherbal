@@ -43,6 +43,11 @@ class UpdateAllPostController {
               message: "A é possível definir tamanho para a imagem!!",
             });
 
+          if (typeof item.size != "number")
+            return res.status(400).json({
+              message: "Tamanho não é um numero!!",
+            });
+
           await prismaClient.postContent.update({
             where: {
               id: item.id,

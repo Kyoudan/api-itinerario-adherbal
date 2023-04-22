@@ -12,14 +12,15 @@ class CreatePostContentController {
         return res.status(400).json({ message: "Tipo do conteudo invalido!!" });
       if (!postId)
         return res.status(500).json({ message: "Postagem invalida!!" });
-      if (!size)
-        return res.status(400).json({ message: "Tamanho invalido!!" });
 
       if (type == "image" && size) {
         return res.status(400).json({
           message: "Não é possível definir um tamanho para a imagem!!",
         });
       }
+
+      if (type != "image" && !size)
+        return res.status(400).json({ message: "Tamanho invalido!!" });
 
       const orderedUser = await prismaClient.postContent.findFirst({
         where: {

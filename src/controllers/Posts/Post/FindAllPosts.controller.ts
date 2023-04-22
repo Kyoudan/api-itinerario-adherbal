@@ -21,8 +21,10 @@ class FindAllPostCategoriesController {
         select: {
           id: true,
           uuid: true,
+          image: true,
           name: true,
           description: true,
+          author: true,
           color: true,
           createdAt: true,
           postTags: {

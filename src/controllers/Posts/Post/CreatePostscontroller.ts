@@ -23,6 +23,7 @@ class CreatePostController {
           description,
           adminId: user.id,
           postTagsId: postTagsId,
+          author: user.name
         },
       });
 

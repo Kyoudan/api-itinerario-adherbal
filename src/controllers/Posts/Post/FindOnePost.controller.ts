@@ -16,6 +16,8 @@ class FindOnePost {
           id: true,
           uuid: true,
           name: true,
+          image:true,
+          author: true,
           description: true,
           color: true,
           createdAt: true,
