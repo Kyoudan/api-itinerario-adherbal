@@ -24,15 +24,25 @@ class CreatePostContentController {
 
       const orderedUser = await prismaClient.postContent.findFirst({
         where: {
-          PostsId: postId,
+          Posts: {
+            uuid: postId,
+          },
         },
         select: {
           order: true,
+          Posts: {
+            select: {
+              id: true,
+            },
+          },
         },
         orderBy: {
           order: "desc",
         },
       });
+
+      if (!orderedUser)
+        return res.status(500).json({ message: "Postagem não encontrada" });
 
       let order = 1;
 
@@ -44,7 +54,7 @@ class CreatePostContentController {
           content,
           type,
           size,
-          PostsId: postId,
+          PostsId: orderedUser.Posts.id,
           order: order,
         },
       });
