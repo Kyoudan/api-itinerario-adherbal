@@ -24,6 +24,7 @@ class FindAllPostCategoriesController {
           image: true,
           name: true,
           description: true,
+          finished: true,
           author: true,
           color: true,
           createdAt: true,

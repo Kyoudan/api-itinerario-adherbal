@@ -7,7 +7,7 @@ class PublishingPostController {
       const { finished } = req.body;
       const uuid = req.params.id;
 
-      if (!finished)
+      if (!finished && finished != false)
         return res.status(500).json({ message: "Erro ao publicar a postagem" });
 
       await prismaClient.posts.update({
