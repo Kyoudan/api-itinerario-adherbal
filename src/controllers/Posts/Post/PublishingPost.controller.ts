@@ -5,20 +5,17 @@ class PublishingPostController {
   async handle(req: Request, res: Response) {
     try {
       const { finished } = req.body;
-      const queryId = req.params.id;
+      const uuid = req.params.id;
 
       if (!finished)
         return res.status(500).json({ message: "Erro ao publicar a postagem" });
-      if (!queryId) return res.status(500).json({ message: "Id invalido!!" });
-      const id = parseInt(queryId);
-      if (isNaN(id)) return res.status(400).json({ message: "Id is NaN" });
 
       await prismaClient.posts.update({
         where: {
-          id,
+          uuid: uuid,
         },
         data: {
-          finished,
+          finished: finished,
         },
       });
 
