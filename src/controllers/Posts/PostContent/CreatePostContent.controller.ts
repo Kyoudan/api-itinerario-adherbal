@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import prismaClient from "../../../database/prismaClient";
 
+interface IConsult {
+  id?: number;
+}
+
 class CreatePostContentController {
   async handle(req: Request, res: Response) {
     try {
@@ -41,20 +45,38 @@ class CreatePostContentController {
         },
       });
 
-      if (!orderedUser)
-        return res.status(500).json({ message: "Postagem não encontrada" });
+      let consult: IConsult | null = {};
+
+      if (!orderedUser) {
+        consult = await prismaClient.posts.findUnique({
+          where: {
+            uuid: postId,
+          },
+          select: {
+            id: true,
+          },
+        });
+
+        if (!consult)
+          return res.status(500).json({ message: "Postagem não encontrada" });
+      }
 
       let order = 1;
 
       if (!orderedUser) order = 1;
       else if (orderedUser) order = orderedUser.order + 1;
 
+      const idPost = !orderedUser ? consult.id : orderedUser.Posts.id;
+
+      if (!idPost)
+        return res.status(500).json({ message: "Postagem não encontrada!!" });
+
       const result = await prismaClient.postContent.create({
         data: {
           content,
           type,
           size,
-          PostsId: orderedUser.Posts.id,
+          PostsId: idPost,
           order: order,
         },
       });
