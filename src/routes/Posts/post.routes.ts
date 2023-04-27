@@ -11,7 +11,7 @@ import PublishingPostController from "../../controllers/Posts/Post/PublishingPos
 const routes = Router();
 
 routes.get("/post/:uuid", FindOnePostController.handle);
-routes.get("/post", FindAllPostsController.handle);
+routes.get("/post", AuthAdmin, FindAllPostsController.handle);
 routes.get("/posts/slug", FindOnePostBySlugController.handle);
 routes.post("/post", AuthAdmin, CreatePostController.handle);
 routes.post("/publish/:id", AuthAdmin, PublishingPostController.handle);

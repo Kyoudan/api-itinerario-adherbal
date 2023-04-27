@@ -23,7 +23,7 @@ class FindAllPostCategoriesController {
 
       if (findQuery && isNaN(find)) {
         data =
-          await prismaClient.$queryRaw`SELECT * FROM posttags WHERE lower(name) LIKE lower(${find})`.count();
+          await prismaClient.$queryRaw`SELECT * FROM posttags WHERE lower(name) LIKE lower(${findQuery})`;
       } else if (findQuery && !isNaN(find)) {
         const result = await prismaClient.postTags.findMany({
           where: {
@@ -44,6 +44,7 @@ class FindAllPostCategoriesController {
           },
         });
       }
+
       res.status(200).json({ data, count });
     } catch {
       res.status(500).json({ message: "Erro ao buscar os dados" });
