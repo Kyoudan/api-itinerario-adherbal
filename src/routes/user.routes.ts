@@ -8,9 +8,10 @@ import FindOneUserController from "../controllers/User/FindOneUser.controller";
 import UpdateUserController from "../controllers/User/UpdateUser.controller";
 import AuthUser from "../middleware/AuthUser";
 import VerifyTokenUserController from "../controllers/User/VerifyTokenUser.controller";
+import AuthAdmin from "../middleware/AuthAdmin";
 const routes = Router();
 
-routes.get("/users", AuthUser, FindAllUsersController.handle);
+routes.get("/users", AuthAdmin, FindAllUsersController.handle);
 routes.get("/users/:id", FindOneUserController.handle);
 routes.post("/users", CreateUserController.handle);
 routes.post("/login", LoginUserController.handle);
