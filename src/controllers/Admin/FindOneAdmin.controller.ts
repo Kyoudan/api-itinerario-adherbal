@@ -8,7 +8,6 @@ class FindOneAdminController {
 
       if (!queryId) return res.status(400).json({ message: "Id invalido!!" });
       const id = parseInt(queryId);
-      const count = await prismaClient.admins.count();
       const data = await prismaClient.admins.findUnique({
         where: {
           id: id,
@@ -18,9 +17,10 @@ class FindOneAdminController {
           name: true,
           email: true,
           createdAt: true,
+          image: true,
         },
       });
-      res.status(200).json({ data, count });
+      res.status(200).json(data);
     } catch {
       res.status(500).json({ message: "Erro ao buscar os dados" });
     }

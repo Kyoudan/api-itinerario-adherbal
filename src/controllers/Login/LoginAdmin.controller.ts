@@ -31,6 +31,7 @@ class LoginAdminController {
               id: user.id,
               name: user.name,
               email: user.email,
+              image: user.image,
             },
             jwt_secret,
             {
