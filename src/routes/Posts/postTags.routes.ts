@@ -7,8 +7,8 @@ import UpdatePostTagsController from "../../controllers/Posts/PostTags/UpdatePos
 import AuthAdmin from "../..//middleware/AuthAdmin";
 const routes = Router();
 
-routes.get("/postTags", AuthAdmin, FindAllPostTagsController.handle);
-routes.get("/postTags/:id", AuthAdmin, FindOnePostTagsController.handle);
+routes.get("/postTags", FindAllPostTagsController.handle);
+routes.get("/postTags/:id", FindOnePostTagsController.handle);
 routes.post("/postTags", AuthAdmin, CreatePostTagsController.handle);
 routes.put("/postTags/:id", AuthAdmin, UpdatePostTagsController.handle);
 routes.delete("/postTags/:id", AuthAdmin, DeletePostTagsController.handle);
