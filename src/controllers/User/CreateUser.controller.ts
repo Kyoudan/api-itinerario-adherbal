@@ -49,13 +49,14 @@ class CreateUserController {
       <img src="${LogoItinerario}" style="width: 350px; height: 350px;"/>
       <br />
       <p style="${TextActivateAccount}">Ative a sua conta do itinerario formativo: se liga na midia, clicando no botão a seguir:</p>
-      <a href="${baseurl}/activateAccount?uid=${user.id}&token=${token}" style="${ButtonActivateAccount}">Ativar</a>
+      <a href="${baseurl}/activateAccount/${token}" style="${ButtonActivateAccount}">Ativar</a>
       `;
 
       sendEmail(from, email, subject, html, text);
 
       res.status(201).json({ message: "Usuario cadastrado com sucesso" });
     } catch (err: any) {
+      console.log(err);
       if (err.meta.target[0] && err.meta.target[0] == "email") {
         return res.status(400).json({ message: "Email ja cadastrado" });
       }
