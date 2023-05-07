@@ -1,5 +1,5 @@
 import { CreateAdminController } from "../controllers/Admin/CreateAdmin.controller";
-import LoginAdminController from "../controllers/Login/LoginAdmin.controller";
+import { LoginAdminController } from "../controllers/Login/LoginAdmin.controller";
 import { Router } from "express";
 import { UpdateAdminController } from "../controllers/Admin/UpdateAdmin.controller";
 import { DeleteAdminController } from "../controllers/Admin/DeleteAdmin.controller";
@@ -12,7 +12,7 @@ const routes = Router();
 
 routes.get("/admins", AuthAdmin, FindAllAdminController);
 routes.get("/admins/:id", AuthAdmin, FindOneAdminController);
-routes.post("/loginadmin", LoginAdminController.handle);
+routes.post("/loginadmin", LoginAdminController);
 routes.post("/admin", AuthAdmin, CreateAdminController);
 routes.post("/verifytokenadm", VerifyTokenAdminController);
 routes.put("/admin", AuthAdmin, UpdateAdminController);
