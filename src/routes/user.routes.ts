@@ -1,5 +1,5 @@
 import { Router } from "express";
-import ActiveAccountController from "../controllers/Email/ActiveAccount.controller";
+import { ActiveAccountController } from "../controllers/Email/ActiveAccount.controller";
 import LoginUserController from "../controllers/Login/LoginUser.controller";
 import CreateUserController from "../controllers/User/CreateUser.controller";
 import DeleteuserController from "../controllers/User/DeleteUser.controller";
@@ -18,6 +18,6 @@ routes.post("/login", LoginUserController.handle);
 routes.post("/verifytoken", VerifyTokenUserController.handle);
 routes.put("/users", AuthUser, UpdateUserController.handle);
 routes.delete("/users", AuthUser, DeleteuserController.handle);
-routes.get("/activateAccount", ActiveAccountController.handle);
+routes.get("/activateAccount", ActiveAccountController);
 
 export default routes;
