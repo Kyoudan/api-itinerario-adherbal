@@ -5,21 +5,19 @@ config();
 
 const jwt_secret = process.env.JWT_SECRET as string;
 
-class VerifyTokenUserController {
-  async handle(req: Request, res: Response) {
-    try {
-      const { token } = req.body;
+export const VerifyTokenUserController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const { token } = req.body;
 
-      if (!token)
-        return res.status(400).json({ message: "Token indefinido!!" });
+    if (!token) return res.status(400).json({ message: "Token indefinido!!" });
 
-      jwt.verify(token, jwt_secret);
+    jwt.verify(token, jwt_secret);
 
-      res.status(200).json(true);
-    } catch {
-      res.status(401).json(false);
-    }
+    res.status(200).json(true);
+  } catch {
+    res.status(401).json(false);
   }
-}
-
-export default new VerifyTokenUserController();
+};
