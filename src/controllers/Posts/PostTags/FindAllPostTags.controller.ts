@@ -3,53 +3,49 @@ import { Request } from "express";
 import prismaClient from "../../../database/prismaClient";
 import { Sql } from "@prisma/client/runtime";
 
-class FindAllPostCategoriesController {
-  async handle(req: Request, res: Response) {
-    try {
-      let queryInit = req.query.init as string;
-      let queryLimit = req.query.limit as string;
-      let findQuery = req.query.find as string;
+export const FindAllPostTagsController = async (req: Request, res: Response) => {
+  try {
+    let queryInit = req.query.init as string;
+    let queryLimit = req.query.limit as string;
+    let findQuery = req.query.find as string;
 
-      !queryInit ? (queryInit = "0") : undefined;
-      !queryLimit ? (queryLimit = "100000") : undefined;
+    !queryInit ? (queryInit = "0") : undefined;
+    !queryLimit ? (queryLimit = "100000") : undefined;
 
-      const init = parseInt(queryInit);
-      const limit = parseInt(queryLimit);
-      const find = parseInt(findQuery);
+    const init = parseInt(queryInit);
+    const limit = parseInt(queryLimit);
+    const find = parseInt(findQuery);
 
-      let data = {};
+    let data = {};
 
-      const count = await prismaClient.postTags.count();
+    const count = await prismaClient.postTags.count();
 
-      if (findQuery && isNaN(find)) {
-        data =
-          await prismaClient.$queryRaw`SELECT * FROM posttags WHERE lower(name) LIKE lower(${findQuery})`;
-      } else if (findQuery && !isNaN(find)) {
-        const result = await prismaClient.postTags.findMany({
-          where: {
-            id: find,
-          },
-        });
-        if (result) {
-          data = result;
-        }
-      } else {
-        data = await prismaClient.postTags.findMany({
-          skip: init,
-          take: limit,
-          select: {
-            id: true,
-            name: true,
-            createdAt: true,
-          },
-        });
+    if (findQuery && isNaN(find)) {
+      data =
+        await prismaClient.$queryRaw`SELECT * FROM posttags WHERE lower(name) LIKE lower(${findQuery})`;
+    } else if (findQuery && !isNaN(find)) {
+      const result = await prismaClient.postTags.findMany({
+        where: {
+          id: find,
+        },
+      });
+      if (result) {
+        data = result;
       }
-
-      res.status(200).json({ data, count });
-    } catch {
-      res.status(500).json({ message: "Erro ao buscar os dados" });
+    } else {
+      data = await prismaClient.postTags.findMany({
+        skip: init,
+        take: limit,
+        select: {
+          id: true,
+          name: true,
+          createdAt: true,
+        },
+      });
     }
-  }
-}
 
-export default new FindAllPostCategoriesController();
+    res.status(200).json({ data, count });
+  } catch {
+    res.status(500).json({ message: "Erro ao buscar os dados" });
+  }
+};

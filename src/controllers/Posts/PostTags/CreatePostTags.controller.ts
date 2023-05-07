@@ -2,8 +2,8 @@ import { Response } from "express";
 import { Request } from "express";
 import prismaClient from "../../../database/prismaClient";
 
-class CreatePostCategoriesController {
-  async handle(req: Request, res: Response) {
+
+  export const CreatePostTagsController = async (req: Request, res: Response) => {
     try {
       const { name } = req.body;
 
@@ -19,7 +19,5 @@ class CreatePostCategoriesController {
     } catch {
       res.status(500).json({ message: "Erro ao criar a categoria" });
     }
-  }
-}
+  };
 
-export default new CreatePostCategoriesController();
