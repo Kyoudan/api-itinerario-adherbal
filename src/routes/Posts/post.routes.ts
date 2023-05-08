@@ -8,11 +8,13 @@ import AuthAdmin from "../../middleware/AuthAdmin";
 import { FindOnePostByNameController } from "../../controllers/Posts/Post/FindOnePostByName.controller";
 import { UpdateAllPostController } from "../../controllers/Posts/Post/UpdateAllPost.controller";
 import { PublishingPostController } from "../../controllers/Posts/Post/PublishingPost.controller";
+import { FindAllByTagController } from "../../controllers/Posts/Post/FindAllByTag.controller";
 const routes = Router();
 
 routes.get("/post/:uuid", FindOnePostController);
-routes.get("/post", AuthAdmin, FindAllPostsController);
+routes.get("/post", FindAllPostsController);
 routes.get("/posts/slug", FindOnePostByNameController);
+routes.get("/postsbytag", FindAllByTagController);
 routes.post("/post", AuthAdmin, CreatePostController);
 routes.post("/publish/:id", AuthAdmin, PublishingPostController);
 routes.put("/postAll", AuthAdmin, UpdateAllPostController);
