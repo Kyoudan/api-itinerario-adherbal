@@ -15,6 +15,8 @@ export const CreatePostController = async (req: UserType, res: Response) => {
     if (!description)
       return res.status(400).json({ message: "Descrição invalida" });
 
+    const slug = name.replace(/ /g, "-").toLowerCase();
+
     await prismaClient.posts.create({
       data: {
         name,
@@ -23,6 +25,7 @@ export const CreatePostController = async (req: UserType, res: Response) => {
         adminId: user.id,
         postTagsId: postTagsId,
         author: user.name,
+        slug,
       },
     });
 

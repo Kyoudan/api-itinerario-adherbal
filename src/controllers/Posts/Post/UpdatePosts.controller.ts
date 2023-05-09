@@ -13,11 +13,14 @@ export const UpdatePostsController = async (req: Request, res: Response) => {
     const id = parseInt(queryId);
     if (isNaN(id)) return res.status(400).json({ message: "id is NaN" });
 
+    const slug = name.replace(/ /g, "-").toLowerCase();
+
     const result = await prismaClient.posts.update({
       data: {
         name,
         color,
         description,
+        slug,
       },
       where: {
         id,

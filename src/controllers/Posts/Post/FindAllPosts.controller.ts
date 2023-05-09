@@ -7,6 +7,7 @@ export const FindAllPostsController = async (req: Request, res: Response) => {
     let queryInit = req.query.init as string;
     let queryLimit = req.query.limit as string;
     let findQuery = req.query.find as string;
+    let tagQuery = req.query.tag as string;
 
     !queryInit ? (queryInit = "0") : undefined;
     !queryLimit ? (queryLimit = "100000") : undefined;
@@ -19,11 +20,95 @@ export const FindAllPostsController = async (req: Request, res: Response) => {
 
     const count = await prismaClient.posts.count();
 
-    if (findQuery && isNaN(find)) {
-      const search = `%${findQuery}%`;
-      console.log(search);
-      data =
-        await prismaClient.$queryRaw`SELECT * FROM posts WHERE lower(name) LIKE ${search}`;
+    if (tagQuery && findQuery && isNaN(find)) {
+      const search = findQuery.replace(/ /g, "-").toLowerCase();
+      data = await prismaClient.posts.findMany({
+        skip: init,
+        take: limit,
+        where: {
+          slug: {
+            contains: search,
+          },
+          postTags: {
+            name: tagQuery,
+          },
+        },
+        select: {
+          id: true,
+          uuid: true,
+          image: true,
+          name: true,
+          description: true,
+          finished: true,
+          author: true,
+          color: true,
+          createdAt: true,
+          postTags: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+          users: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+            },
+          },
+          PostContent: {
+            select: {
+              id: true,
+              content: true,
+              type: true,
+              size: true,
+            },
+          },
+        },
+      });
+    } else if (findQuery && isNaN(find)) {
+      const search = findQuery.replace(/ /g, "-").toLowerCase();
+      data = await prismaClient.posts.findMany({
+        skip: init,
+        take: limit,
+        where: {
+          slug: {
+            contains: search,
+          },
+        },
+        select: {
+          id: true,
+          uuid: true,
+          image: true,
+          name: true,
+          description: true,
+          finished: true,
+          author: true,
+          color: true,
+          createdAt: true,
+          postTags: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+          users: {
+            select: {
+              id: true,
+              name: true,
+              email: true,
+            },
+          },
+          PostContent: {
+            select: {
+              id: true,
+              content: true,
+              type: true,
+              size: true,
+            },
+          },
+        },
+      });
     } else if (findQuery && !isNaN(find)) {
       data = await prismaClient.posts.findMany({
         skip: init,

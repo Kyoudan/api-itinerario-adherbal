@@ -10,7 +10,7 @@ interface IContent {
 
 export const UpdateAllPostController = async (req: Request, res: Response) => {
   try {
-    const { title, description, color, id, author } = req.body;
+    const { title, description, color, id, author, image } = req.body;
     const content: IContent[] = req.body.content;
 
     if (!title) return res.status(400).json({ message: "Titulo invalido!!" });
@@ -23,6 +23,8 @@ export const UpdateAllPostController = async (req: Request, res: Response) => {
     if (!Array.isArray(content))
       return res.status(500).json({ message: "Array de conteudo invalido!!" });
 
+    const slug = title.replace(/ /g, "-").toLowerCase();
+
     await prismaClient.posts.update({
       where: {
         id: id,
@@ -32,6 +34,8 @@ export const UpdateAllPostController = async (req: Request, res: Response) => {
         author,
         description,
         color,
+        image,
+        slug,
       },
     });
 
