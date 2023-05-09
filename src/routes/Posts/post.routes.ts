@@ -9,16 +9,23 @@ import { FindOnePostByNameController } from "../../controllers/Posts/Post/FindOn
 import { UpdateAllPostController } from "../../controllers/Posts/Post/UpdateAllPost.controller";
 import { PublishingPostController } from "../../controllers/Posts/Post/PublishingPost.controller";
 import { FindAllByTagController } from "../../controllers/Posts/Post/FindAllByTag.controller";
+import { FindAllPostsPublicController } from "../../controllers/Posts/Post/FindAllPostsPublic.controller";
+import { FindAllPostsPrivateController } from "../../controllers/Posts/Post/FindAllPostsPrivate.controller";
 const routes = Router();
 
 routes.get("/post/:uuid", FindOnePostController);
 routes.get("/post", FindAllPostsController);
 routes.get("/posts/slug", FindOnePostByNameController);
 routes.get("/postsbytag", FindAllByTagController);
+routes.get("/postspublic", FindAllPostsPublicController);
+routes.get("/postsprivate", AuthAdmin, FindAllPostsPrivateController);
+
 routes.post("/post", AuthAdmin, CreatePostController);
 routes.post("/publish/:id", AuthAdmin, PublishingPostController);
+
 routes.put("/postAll", AuthAdmin, UpdateAllPostController);
 routes.put("/post/:id", UpdatePostsController);
+
 routes.delete("/post/:id", DeletePostsController);
 
 export default routes;
