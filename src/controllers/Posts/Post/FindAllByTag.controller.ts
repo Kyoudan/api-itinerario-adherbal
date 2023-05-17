@@ -19,14 +19,15 @@ export const FindAllByTagController = async (req: Request, res: Response) => {
 
     const count = await prismaClient.posts.count();
 
-    
     if (queryFind) {
-      const find = queryFind.replace(/ /g, "-").toLowerCase( )
+      const find = queryFind.replace(/ /g, "-").toLowerCase();
       const data = await prismaClient.posts.findMany({
         skip: init,
         take: limit,
         where: {
-          slug: find,
+          slug: {
+            contains: find,
+          },
           postTags: {
             name: {
               contains: queryTag,
