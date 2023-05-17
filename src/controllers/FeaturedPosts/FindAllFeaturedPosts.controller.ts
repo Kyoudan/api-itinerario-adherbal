@@ -1,7 +1,10 @@
 import { Request, Response } from "express";
 import prismaClient from "../../database/prismaClient";
 
-export const FindAllFeaturedPostsController = async (req: Request, res: Response) => {
+export const FindAllFeaturedPostsController = async (
+  req: Request,
+  res: Response
+) => {
   let queryInit = req.query.init as string;
   let queryLimit = req.query.limit as string;
 
@@ -22,6 +25,7 @@ export const FindAllFeaturedPostsController = async (req: Request, res: Response
           select: {
             id: true,
             name: true,
+            image: true,
             color: true,
             uuid: true,
             users: {

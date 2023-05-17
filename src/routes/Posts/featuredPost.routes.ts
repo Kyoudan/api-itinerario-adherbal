@@ -6,7 +6,7 @@ import {DeleteFeaturedPostsController} from "../../controllers/FeaturedPosts/Del
 import AuthAdmin from "../../middleware/AuthAdmin";
 const routes = Router();
 
-routes.get("/featuredposts", AuthAdmin, FindAllFeaturedPostsController);
+routes.get("/featuredposts", FindAllFeaturedPostsController);
 routes.post("/featuredposts", AuthAdmin, CreateFeaturedPostsController);
 routes.put("/featuredposts", AuthAdmin, UpdatedFeaturedPostsController);
 routes.delete("/featuredposts", AuthAdmin, DeleteFeaturedPostsController);
