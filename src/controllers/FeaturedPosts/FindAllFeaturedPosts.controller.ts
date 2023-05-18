@@ -27,6 +27,7 @@ export const FindAllFeaturedPostsController = async (
             name: true,
             image: true,
             color: true,
+            description: true,
             uuid: true,
             users: {
               select: {

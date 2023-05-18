@@ -26,7 +26,8 @@ export const CreateFeaturedPostsController = async (
     res
       .status(201)
       .json({ message: "Postagem colocada em destaque com sucesso" });
-  } catch {
+  } catch(err) {
+    console.log(err)
     res.status(500).json({ message: "Erro ao colocar postagem em destaque!!" });
   }
 };
