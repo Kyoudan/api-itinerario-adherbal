@@ -6,7 +6,6 @@ export const FindOnePostController = async (req: Request, res: Response) => {
     const { uuid } = req.params;
 
     if (!uuid) return res.status(400).json({ message: "id invalido" });
-    const count = await prismaClient.posts.count();
     const data = await prismaClient.posts.findFirst({
       where: {
         uuid,
@@ -32,6 +31,7 @@ export const FindOnePostController = async (req: Request, res: Response) => {
             id: true,
             name: true,
             email: true,
+            image: true,
           },
         },
         PostContent: {
@@ -49,7 +49,7 @@ export const FindOnePostController = async (req: Request, res: Response) => {
       },
     });
     if (data) {
-      res.status(200).json({ data, count });
+      res.status(200).json(data);
     } else {
       res.status(404).json({ message: "Categoria não encontrada" });
     }
