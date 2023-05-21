@@ -1,7 +1,10 @@
 import { Response, Request } from "express";
 import prismaClient from "../../database/prismaClient";
 
-export const UpdatedFeaturedPostsController = async (req: Request, res: Response) => {
+export const UpdatedFeaturedPostsController = async (
+  req: Request,
+  res: Response
+) => {
   try {
     const remove = req.body.removePostId;
     const add = req.body.addPostId;
@@ -16,14 +19,20 @@ export const UpdatedFeaturedPostsController = async (req: Request, res: Response
         message: "A postagem a ser adicionada não foi especificada!!",
       });
 
-    await prismaClient.posts.delete({
+    await prismaClient.posts.update({
+      data: {
+        isFixed: false,
+      },
       where: {
         id: remove,
       },
     });
-    await prismaClient.featuredPosts.create({
+    await prismaClient.posts.update({
       data: {
-        PostId: add,
+        isFixed: true,
+      },
+      where: {
+        id: add,
       },
     });
 

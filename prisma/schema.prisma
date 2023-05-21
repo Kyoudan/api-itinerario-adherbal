@@ -7,12 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model FeaturedPosts {
-  id     Int   @id @default(autoincrement())
-  PostId Int
-  Post   Posts @relation(fields: [PostId], references: [id], onDelete: Cascade)
-}
-
 model ActivateAccounts {
   id        Int      @id @default(autoincrement())
   token     String   @unique @db.VarChar(255)
@@ -45,22 +39,23 @@ model PostContent {
 }
 
 model Posts {
-  id            Int             @id @default(autoincrement())
-  uuid          String          @unique @default(uuid())
-  image         String?         @db.Text
-  name          String          @db.VarChar(255)
-  slug          String          @db.VarChar(255)
-  description   String          @db.VarChar(100)
-  color         String          @db.VarChar(255)
-  finished      Boolean         @default(false)
-  author        String
-  adminId       Int
-  createdAt     DateTime        @default(now())
-  postTagsId    Int
-  postTags      PostTags        @relation(fields: [postTagsId], references: [id], onDelete: Cascade)
-  users         Admins          @relation(fields: [adminId], references: [id], onDelete: Cascade)
-  PostContent   PostContent[]
-  FeaturedPosts FeaturedPosts[]
+  id          Int           @id @default(autoincrement())
+  uuid        String        @unique @default(uuid())
+  image       String?       @db.Text
+  name        String        @db.VarChar(255)
+  slug        String        @db.VarChar(255)
+  description String        @db.VarChar(100)
+  color       String        @db.VarChar(255)
+  finished    Boolean       @default(false)
+  likes       Int           @default(0)
+  isFixed     Boolean       @default(false)
+  author      String
+  adminId     Int
+  createdAt   DateTime      @default(now())
+  postTagsId  Int
+  postTags    PostTags      @relation(fields: [postTagsId], references: [id], onDelete: Cascade)
+  users       Admins        @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  PostContent PostContent[]
 
   @@map("posts")
 }

@@ -15,40 +15,43 @@ export const FindAllFeaturedPostsController = async (
   const limit = parseInt(queryLimit);
 
   try {
-    const count = await prismaClient.featuredPosts.count();
-    const data = await prismaClient.featuredPosts.findMany({
+    const count = await prismaClient.posts.count({
+      where: {
+        isFixed: true,
+      },
+    });
+    const data = await prismaClient.posts.findMany({
       skip: init,
       take: limit,
+      where: {
+        isFixed: true,
+      },
       select: {
         id: true,
-        Post: {
+        name: true,
+        image: true,
+        color: true,
+        description: true,
+        uuid: true,
+        isFixed: true,
+        users: {
           select: {
             id: true,
             name: true,
-            image: true,
-            color: true,
-            description: true,
-            uuid: true,
-            users: {
-              select: {
-                id: true,
-                name: true,
-                email: true,
-              },
-            },
-            postTags: {
-              select: {
-                id: true,
-                name: true,
-              },
-            },
-            PostContent: {
-              select: {
-                id: true,
-                content: true,
-                type: true,
-              },
-            },
+            email: true,
+          },
+        },
+        postTags: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        PostContent: {
+          select: {
+            id: true,
+            content: true,
+            type: true,
           },
         },
       },
