@@ -38,6 +38,14 @@ model PostContent {
   @@map("postcontent")
 }
 
+model PostLikes {
+  id      Int   @id @default(autoincrement())
+  PostsId Int
+  Posts   Posts @relation(fields: [PostsId], references: [id], onDelete: Cascade)
+  UserId  Int
+  User    Users @relation(fields: [UserId], references: [id], onDelete: Cascade)
+}
+
 model Posts {
   id          Int           @id @default(autoincrement())
   uuid        String        @unique @default(uuid())
@@ -56,6 +64,7 @@ model Posts {
   postTags    PostTags      @relation(fields: [postTagsId], references: [id], onDelete: Cascade)
   users       Admins        @relation(fields: [adminId], references: [id], onDelete: Cascade)
   PostContent PostContent[]
+  PostLikes   PostLikes[]
 
   @@map("posts")
 }
@@ -82,6 +91,7 @@ model Users {
   createdAt        DateTime           @default(now())
   activateAccounts ActivateAccounts[]
   recoverPasswords RecoverPasswords[]
+  PostLikes        PostLikes[]
 
   @@map("users")
 }
