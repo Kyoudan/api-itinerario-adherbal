@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "API do itinerario 'se liga na midia' dos alunos da escola PEI Adherbal de Paula Ferreira localizada em Itapetininga - SP",
   "main": "index.js",
-  "prisma": {
-    "seed": "tsnd ./prisma/seed.ts"
-  },
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
