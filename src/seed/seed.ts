@@ -1,4 +1,4 @@
-import prismaClient from "../src/database/prismaClient";
+import prismaClient from "../database/prismaClient";
 import { hashSync } from "bcrypt";
 import { config } from "dotenv";
 config();
