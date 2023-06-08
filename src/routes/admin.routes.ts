@@ -1,5 +1,5 @@
 import { CreateAdminController } from "../controllers/Admin/CreateAdmin.controller";
-import { LoginAdminController } from "../controllers/Login/LoginAdmin.controller";
+import { LoginAdminController } from "../controllers/Admin/LoginAdmin.controller";
 import { Router } from "express";
 import { UpdateAdminController } from "../controllers/Admin/UpdateAdmin.controller";
 import { DeleteAdminController } from "../controllers/Admin/DeleteAdmin.controller";
