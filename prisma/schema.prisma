@@ -7,16 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model ActivateAccounts {
-  id        Int      @id @default(autoincrement())
-  token     String   @unique @db.VarChar(255)
-  createdAt DateTime @default(now())
-  userId    Int
-  users     Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("activateaccounts")
-}
-
 model PostTags {
   id        Int      @id @default(autoincrement())
   name      String   @db.VarChar(255)
@@ -27,23 +17,16 @@ model PostTags {
 }
 
 model PostContent {
-  id      Int    @id @default(autoincrement())
-  content String @db.Text
-  type    String @db.Text
-  size    Float?
-  order   Int    @default(0)
-  PostsId Int
-  Posts   Posts  @relation(fields: [PostsId], references: [id], onDelete: Cascade)
+  id        Int     @id @default(autoincrement())
+  content   String  @db.Text
+  type      String  @db.Text
+  size      Float?
+  order     Int     @default(0)
+  reference String?
+  PostsId   Int
+  Posts     Posts   @relation(fields: [PostsId], references: [id], onDelete: Cascade)
 
   @@map("postcontent")
-}
-
-model PostLikes {
-  id      Int   @id @default(autoincrement())
-  PostsId Int
-  Posts   Posts @relation(fields: [PostsId], references: [id], onDelete: Cascade)
-  UserId  Int
-  User    Users @relation(fields: [UserId], references: [id], onDelete: Cascade)
 }
 
 model Posts {
@@ -55,7 +38,6 @@ model Posts {
   description String        @db.VarChar(100)
   color       String        @db.VarChar(255)
   finished    Boolean       @default(false)
-  likes       Int           @default(0)
   isFixed     Boolean       @default(false)
   author      String
   adminId     Int
@@ -64,47 +46,18 @@ model Posts {
   postTags    PostTags      @relation(fields: [postTagsId], references: [id], onDelete: Cascade)
   users       Admins        @relation(fields: [adminId], references: [id], onDelete: Cascade)
   PostContent PostContent[]
-  PostLikes   PostLikes[]
 
   @@map("posts")
 }
 
-model RecoverPasswords {
-  id        Int      @id @default(autoincrement())
-  token     String   @unique @db.VarChar(255)
-  createdAt DateTime @default(now())
-  userId    Int?
-  users     Users?   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  adminId   Int?
-  Admin     Admins?  @relation(fields: [adminId], references: [id], onDelete: Cascade)
-
-  @@map("recoverpasswords")
-}
-
-model Users {
-  id               Int                @id @default(autoincrement())
-  name             String             @db.VarChar(255)
-  description      String?            @db.VarChar(255)
-  email            String             @unique @db.VarChar(255)
-  password         String             @db.VarChar(255)
-  activated        Boolean            @default(false)
-  createdAt        DateTime           @default(now())
-  activateAccounts ActivateAccounts[]
-  recoverPasswords RecoverPasswords[]
-  PostLikes        PostLikes[]
-
-  @@map("users")
-}
-
 model Admins {
-  id               Int                @id @default(autoincrement())
-  image            String?            @db.Text()
-  name             String             @db.VarChar(255)
-  email            String             @unique @db.VarChar(255)
-  password         String             @db.VarChar(255)
-  createdAt        DateTime           @default(now())
-  posts            Posts[]
-  recoverPasswords RecoverPasswords[]
+  id        Int      @id @default(autoincrement())
+  image     String?  @db.Text()
+  name      String   @db.VarChar(255)
+  email     String   @unique @db.VarChar(255)
+  password  String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  posts     Posts[]
 
   @@map("admins")
 }
