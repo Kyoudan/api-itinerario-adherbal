@@ -3,41 +3,6 @@ import { hashSync } from "bcrypt";
 import { config } from "dotenv";
 config();
 
-async function seedUser() {
-  try {
-    const user1 = {
-      id: 1,
-      name: "user",
-      email: "user@gmail.com",
-      password: hashSync("123", 8),
-      activated: true,
-    };
-
-    const user2 = {
-      id: 2,
-      name: "user2",
-      email: "user2@gmail.com",
-      password: hashSync("123", 8),
-      activated: false,
-    };
-
-    await prismaClient.users.createMany({
-      data: [user1, user2],
-    });
-
-    console.log("Criado 1 !!");
-  } catch (err: any) {
-    if (err.meta.target && err.meta.target[0] == "email") {
-      return console.log("Email já cadastrado 1");
-    }
-    if (err.meta.target && err.meta.target[0] == "id") {
-      return console.log("Id já cadastrado 1");
-    }
-    console.log(err);
-    console.log("Erro do codigo 1 !!");
-  }
-}
-
 async function seedAdm() {
   try {
     const adm = {
@@ -323,7 +288,6 @@ async function seedPostsContent() {
 }
 
 async function createSeeds() {
-  await seedUser();
   await seedAdm();
   await seedPostTags();
   await seedPosts();
