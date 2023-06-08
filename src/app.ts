@@ -6,16 +6,13 @@ import swaggerUi from "swagger-ui-express";
 import swaggerDocs from "./swagger.json";
 import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
-import { buildSchema } from "type-graphql";
-import PostResolver from "./graphql/Posts/PostsResolver";
+
+import { buildSchemasFunction } from "./graphql/index.graphql";
 config();
 const app = express();
 
 const boostrapStart = async () => {
-  const schemas = await buildSchema({
-    resolvers: [PostResolver],
-  });
-
+  const schemas = await buildSchemasFunction();
   const server = new ApolloServer({ schema: schemas });
   await server.start();
   server.applyMiddleware({ app });
