@@ -46,15 +46,15 @@ class PostController {
   }
 
   async getOnePost(arg: number | string) {
-    const string = z.string().safeParse(arg).success;
-    const uuid = z.string().uuid().safeParse(arg).success;
-    const number = z
-      .number()
-      .safeParse(typeof arg === "string" ? parseInt(arg) : arg).success;
+    const verifyType = z
+      .union([z.string(), z.string().uuid()])
+      .safeParse(arg).success;
+    const numberType = typeof arg === "string" ? parseInt(arg) : arg;
+    const number = z.number().safeParse(numberType).success;
 
-    if (!string && !uuid && !number) return null;
+    if (!verifyType) return null;
 
-    let find = arg; 
+    let find = number ? numberType : arg;
 
     try {
       const result = await prismaClient.posts.findFirst({
@@ -64,10 +64,17 @@ class PostController {
               id: typeof find === "number" ? find : undefined,
             },
             {
-              slug: typeof find === "string" ? find : undefined,
+              slug: {
+                contains:
+                  typeof find === "string"
+                    ? find.toLowerCase().replace(/ /g, "-")
+                    : undefined,
+              },
             },
             {
-              uuid: typeof find === "string" ? find : undefined,
+              uuid: {
+                contains: typeof find === "string" ? find : undefined,
+              },
             },
           ],
         },
