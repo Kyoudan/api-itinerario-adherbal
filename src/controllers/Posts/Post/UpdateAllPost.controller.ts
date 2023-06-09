@@ -25,7 +25,7 @@ export const UpdateAllPostController = async (req: Request, res: Response) => {
 
     const slug = title.replace(/ /g, "-").toLowerCase();
 
-    await prismaClient.posts.update({
+    const update = await prismaClient.posts.update({
       where: {
         id: id,
       },
@@ -37,11 +37,17 @@ export const UpdateAllPostController = async (req: Request, res: Response) => {
         image,
         slug,
       },
+      select: {
+        PostContent: {
+          select: {
+            content: true,
+          },
+        },
+      },
     });
 
     content.forEach(async (item: IContent) => {
       if (item) {
-        console.log(item);
         if (item.type == "image" && item.size)
           return res.status(400).json({
             message: "A é possível definir tamanho para a imagem!!",
@@ -53,16 +59,26 @@ export const UpdateAllPostController = async (req: Request, res: Response) => {
           });
         }
 
-        await prismaClient.postContent.update({
-          where: {
-            id: item.id,
-          },
-          data: {
-            content: item.text,
-            type: item.type,
-            size: item.size,
-          },
+        let check = false;
+
+        update.PostContent.find((e) => {
+          if (e.content == item.text) {
+            check = true;
+          }
         });
+
+        if (!check) {
+          await prismaClient.postContent.update({
+            where: {
+              id: item.id,
+            },
+            data: {
+              content: item.text,
+              type: item.type,
+              size: item.size,
+            },
+          });
+        }
       }
     });
     return res
