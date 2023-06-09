@@ -16,7 +16,7 @@ export const CreatePostController = async (req: UserType, res: Response) => {
 
     const slug = name.replace(/ /g, "-").toLowerCase();
 
-    await prismaClient.posts.create({
+    const result = await prismaClient.posts.create({
       data: {
         name,
         description,
@@ -27,7 +27,7 @@ export const CreatePostController = async (req: UserType, res: Response) => {
       },
     });
 
-    res.status(201).json({ message: "Postagem criada com sucesso!!" });
+    res.status(201).json({ message: "Postagem criada com sucesso!!", uuid: result.uuid });
   } catch (err: any) {
     if (err.meta.target && err.meta.target[0] == "slug") {
       return res.status(400).json({ message: "Nome ja cadastrado" });
