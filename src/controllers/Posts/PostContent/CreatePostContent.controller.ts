@@ -10,7 +10,7 @@ export const CreatePostContentController = async (
   res: Response
 ) => {
   try {
-    const { content, type, postId, size } = req.body;
+    const { content, type, postId, size, reference } = req.body;
 
     if (!content)
       return res.status(400).json({ message: "Conteudo invalido!!" });
@@ -80,6 +80,7 @@ export const CreatePostContentController = async (
         size,
         PostsId: idPost,
         order: order,
+        reference,
       },
     });
     res.status(201).json(result);
