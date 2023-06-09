@@ -3,11 +3,10 @@ import prismaClient from "../../../database/prismaClient";
 
 export const UpdatePostsController = async (req: Request, res: Response) => {
   try {
-    const { name, color, description } = req.body;
+    const { name, description } = req.body;
     const queryId = req.params.id;
 
     if (!name) return res.status(400).json({ message: "Nome invalido!!" });
-    if (!color) return res.status(400).json({ message: "Cor invalida" });
     if (!description)
       return res.status(400).json({ message: "Descrição invalida" });
     const id = parseInt(queryId);
@@ -18,7 +17,6 @@ export const UpdatePostsController = async (req: Request, res: Response) => {
     const result = await prismaClient.posts.update({
       data: {
         name,
-        color,
         description,
         slug,
       },

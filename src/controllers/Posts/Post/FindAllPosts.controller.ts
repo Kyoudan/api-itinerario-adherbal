@@ -41,7 +41,6 @@ export const FindAllPostsController = async (req: Request, res: Response) => {
           description: true,
           finished: true,
           author: true,
-          color: true,
           createdAt: true,
           postTags: {
             select: {
@@ -84,7 +83,6 @@ export const FindAllPostsController = async (req: Request, res: Response) => {
           description: true,
           finished: true,
           author: true,
-          color: true,
           createdAt: true,
           postTags: {
             select: {
@@ -124,7 +122,7 @@ export const FindAllPostsController = async (req: Request, res: Response) => {
           description: true,
           finished: true,
           author: true,
-          color: true,
+  
           createdAt: true,
           postTags: {
             select: {
@@ -161,7 +159,6 @@ export const FindAllPostsController = async (req: Request, res: Response) => {
           description: true,
           finished: true,
           author: true,
-          color: true,
           createdAt: true,
           postTags: {
             select: {

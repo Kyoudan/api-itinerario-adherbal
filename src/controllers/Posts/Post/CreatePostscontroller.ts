@@ -4,11 +4,10 @@ import { UserType } from "../../../types/UserType";
 
 export const CreatePostController = async (req: UserType, res: Response) => {
   try {
-    const { name, color, description, postTagsId } = req.body;
+    const { name, description, postTagsId } = req.body;
     const user = req.user;
 
     if (!name) return res.status(400).json({ message: "Nome invalido!!" });
-    if (!color) return res.status(400).json({ message: "Cor invalida!!" });
     if (!user) return res.status(500).json({ message: "Usuario invalido!!" });
     if (!postTagsId)
       return res.status(400).json({ message: "Categoria invalida" });
@@ -20,7 +19,6 @@ export const CreatePostController = async (req: UserType, res: Response) => {
     await prismaClient.posts.create({
       data: {
         name,
-        color,
         description,
         adminId: user.id,
         postTagsId: postTagsId,

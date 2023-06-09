@@ -10,12 +10,11 @@ interface IContent {
 
 export const UpdateAllPostController = async (req: Request, res: Response) => {
   try {
-    const { title, description, color, id, author, image } = req.body;
+    const { title, description, id, author, image } = req.body;
     const content: IContent[] = req.body.content;
 
     if (!title) return res.status(400).json({ message: "Titulo invalido!!" });
     if (!author) return res.status(400).json({ message: "Autor invalido!!" });
-    if (!color) return res.status(400).json({ message: "Cor invalida!!" });
     if (!description)
       return res.status(400).json({ message: "Descrição invalida!!" });
     if (!content)
@@ -33,7 +32,6 @@ export const UpdateAllPostController = async (req: Request, res: Response) => {
         name: title,
         author,
         description,
-        color,
         image,
         slug,
       },

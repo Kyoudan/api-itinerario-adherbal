@@ -36,7 +36,6 @@ model Posts {
   name        String        @db.VarChar(255)
   slug        String        @db.VarChar(255)
   description String        @db.VarChar(100)
-  color       String        @db.VarChar(255)
   finished    Boolean       @default(false)
   isFixed     Boolean       @default(false)
   author      String
