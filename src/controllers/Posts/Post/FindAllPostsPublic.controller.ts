@@ -105,6 +105,7 @@ export const FindAllPostsPublicController = async (req: Request, res: Response) 
               content: true,
               type: true,
               size: true,
+              reference: true
             },
           },
         },
@@ -145,6 +146,7 @@ export const FindAllPostsPublicController = async (req: Request, res: Response) 
               content: true,
               type: true,
               size: true,
+              reference: true
             },
           },
         },
@@ -184,6 +186,7 @@ export const FindAllPostsPublicController = async (req: Request, res: Response) 
               content: true,
               type: true,
               size: true,
+              reference: true
             },
           },
         },

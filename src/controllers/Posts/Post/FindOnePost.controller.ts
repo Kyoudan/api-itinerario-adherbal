@@ -40,6 +40,7 @@ export const FindOnePostController = async (req: Request, res: Response) => {
             order: true,
             type: true,
             size: true,
+            reference: true,
           },
           orderBy: {
             order: "asc",

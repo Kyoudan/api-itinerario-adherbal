@@ -1,7 +1,10 @@
 import { Response, Request } from "express";
 import prismaClient from "../../../database/prismaClient";
 
-export const FindOnePostContentController = async (req: Request, res: Response) => {
+export const FindOnePostContentController = async (
+  req: Request,
+  res: Response
+) => {
   try {
     const queryId = req.params.id;
 
@@ -17,12 +20,13 @@ export const FindOnePostContentController = async (req: Request, res: Response) 
         id: true,
         content: true,
         type: true,
+        reference: true,
         Posts: {
           select: {
+            uuid: true,
             id: true,
             name: true,
             description: true,
-            color: true,
           },
         },
       },

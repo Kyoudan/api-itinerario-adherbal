@@ -61,6 +61,7 @@ export const FindAllPostsController = async (req: Request, res: Response) => {
               content: true,
               type: true,
               size: true,
+              reference: true,
             },
           },
         },
@@ -103,6 +104,7 @@ export const FindAllPostsController = async (req: Request, res: Response) => {
               content: true,
               type: true,
               size: true,
+              reference: true,
             },
           },
         },
@@ -122,7 +124,7 @@ export const FindAllPostsController = async (req: Request, res: Response) => {
           description: true,
           finished: true,
           author: true,
-  
+
           createdAt: true,
           postTags: {
             select: {
@@ -143,6 +145,7 @@ export const FindAllPostsController = async (req: Request, res: Response) => {
               content: true,
               type: true,
               size: true,
+              reference: true,
             },
           },
         },
@@ -179,6 +182,7 @@ export const FindAllPostsController = async (req: Request, res: Response) => {
               content: true,
               type: true,
               size: true,
+              reference: true,
             },
           },
         },
