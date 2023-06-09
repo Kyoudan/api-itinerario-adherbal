@@ -1,19 +1,25 @@
-import { Resolver, Query, Arg } from "type-graphql";
-import { PostInput, ResponseGetAllPosts, ResponseGetOnePost } from "./PostsSchema";
+import { Resolver, Query, Args } from "type-graphql";
+import {
+  ArgsGetAllPost,
+  ArgsGetOnePost,
+  ResponseGetAllPosts,
+  ResponseGetOnePost,
+} from "./PostsSchema";
 import PostController from "./PostController";
 
 @Resolver()
 class PostResolver {
   @Query(() => ResponseGetAllPosts)
-  async getAllPosts(): Promise<ResponseGetAllPosts> {
-    const result = await PostController.getAllPosts();
+  async getAllPost(@Args() args: ArgsGetAllPost): Promise<ResponseGetAllPosts> {
+    const result = await PostController.getAllPosts(args.limit, args.init);
     if (!result) return { message: "Error", status: 500 };
     return { message: "Success", status: 200, data: result };
   }
 
   @Query(() => ResponseGetOnePost)
-  async getOnePost(@Arg("input") postInput: PostInput): Promise<ResponseGetOnePost> {
-    const result = await PostController.getOnePost(postInput.find);
+  async getOnePost(@Args() args: ArgsGetOnePost): Promise<ResponseGetOnePost> {
+    console.log(args);
+    const result = await PostController.getOnePost(args.find);
     if (!result) return { message: "Error", status: 500 };
     return { message: "Success", status: 200, data: result };
   }

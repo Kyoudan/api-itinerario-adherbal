@@ -2,9 +2,11 @@ import prismaClient from "../../database/prismaClient";
 import { z } from "zod";
 
 class PostController {
-  async getAllPosts() {
+  async getAllPosts(limit?: number, init?: number) {
     try {
       const result = await prismaClient.posts.findMany({
+        take: limit ? limit : 10000000,
+        skip: init ? init : 0,
         select: {
           id: true,
           name: true,
