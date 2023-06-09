@@ -1,4 +1,4 @@
-import { Field, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 
 export type Posts = {
   id: number;
@@ -95,7 +95,7 @@ export class PostType {
 }
 
 @ObjectType()
-export class ResponseUser {
+export class ResponseGetAllPosts {
   @Field()
   message: string;
 
@@ -104,4 +104,22 @@ export class ResponseUser {
 
   @Field(() => [PostType], { nullable: true })
   data?: PostType[];
+}
+
+@ObjectType()
+export class ResponseGetOnePost {
+  @Field()
+  message: string;
+
+  @Field()
+  status: number;
+
+  @Field(() => PostType, { nullable: true })
+  data?: PostType;
+}
+
+@InputType()
+export class PostInput {
+  @Field()
+  find: string;
 }
