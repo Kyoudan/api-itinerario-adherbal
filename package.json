@@ -15,7 +15,8 @@
     "dev:migrate": "npx prisma migrate dev",
     "dev:studio": "npx prisma studio",
     "dev:restaure": "npx prisma introspect",
-    "dev:seed": "npx prisma db seed"
+    "dev:seed": "npx prisma db seed",
+    "build:tsup": "tsup src/server.ts --format cjs,esm --dts-resolve --minify --clean --sourcemap --legacy-output"
   },
   "keywords": [],
   "author": "Gustavo Rafael Cardilho",
@@ -45,6 +46,7 @@
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
+    "tsup": "^6.7.0",
     "typescript": "^5.0.2"
   },
   "dependencies": {
