@@ -18,7 +18,7 @@ export type Posts = {
 
 @ObjectType()
 class PostContent {
-  @Field()
+  @Field(() => Number)
   id: number;
 
   @Field()
@@ -54,7 +54,7 @@ class PostTags {
 
 @ObjectType()
 export class PostType {
-  @Field()
+  @Field(() => Number)
   id: number;
 
   @Field()
