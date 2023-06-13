@@ -55,7 +55,6 @@ async function seedPosts() {
     const posts = [
       {
         name: "Perigo do covid 19 para nosso planeta",
-        color: "#fff",
         description: "Esse texto vai falar sobre a covid-19",
         adminId: 1,
         postTagsId: 1,
@@ -67,7 +66,6 @@ async function seedPosts() {
       },
       {
         name: "Uma teoria sobre os dinossauros, eles são reais?",
-        color: "#fff",
         description: "Esse texto vai falar sobre os dinossauros",
         adminId: 1,
         postTagsId: 7,
@@ -79,7 +77,6 @@ async function seedPosts() {
       },
       {
         name: "Historia do brasil é importante",
-        color: "#fff",
         description: "Esse texto vai falar sobre o brasil",
         adminId: 1,
         postTagsId: 6,
@@ -90,7 +87,6 @@ async function seedPosts() {
       },
       {
         name: "As inteligencias artificias e a humanidade",
-        color: "#fff",
         description: "Esse texto vai falar sobre as i.a",
         adminId: 1,
         postTagsId: 6,
