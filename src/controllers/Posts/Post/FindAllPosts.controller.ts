@@ -190,7 +190,8 @@ export const FindAllPostsController = async (req: Request, res: Response) => {
     }
 
     res.status(200).json({ data, count });
-  } catch {
+  } catch(err) {
+    console.log(err)
     res.status(500).json({ message: "Erro ao buscar os dados" });
   }
 };
