@@ -30,7 +30,6 @@ export const FindAllFeaturedPostsController = async (
         id: true,
         name: true,
         image: true,
-        color: true,
         description: true,
         uuid: true,
         isFixed: true,
@@ -57,7 +56,8 @@ export const FindAllFeaturedPostsController = async (
       },
     });
     res.status(200).json({ data, count });
-  } catch {
+  } catch (err) {
+    console.log(err);
     res.status(500).json({ message: "Erro ao buscar os dados" });
   }
 };

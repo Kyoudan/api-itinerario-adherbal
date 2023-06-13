@@ -1,6 +1,7 @@
 import prismaClient from "../database/prismaClient";
 import { hashSync } from "bcrypt";
 import { config } from "dotenv";
+import { green, red, yellow } from "colorette";
 config();
 
 async function seedAdm() {
@@ -14,21 +15,25 @@ async function seedAdm() {
     await prismaClient.admins.create({
       data: adm,
     });
-    console.log("Criado 2");
+    console.log(green("Adm criado com sucesso"));
   } catch (err: any) {
-    if (err.meta.target && err.meta.target[0] == "email") {
-      return console.log("Email já cadastrado 2");
+    if (err.meta && err.meta.target && err.meta.target[0] == "email") {
+      return console.log(yellow("! Email já cadastrado !"));
     }
-    if (err.meta.target && err.meta.target[0] == "id") {
-      return console.log("Id já cadastrado 2");
+    if (err.meta && err.meta.target && err.meta.target[0] == "id") {
+      return console.log(yellow("! Id já cadastrado !"));
     }
     console.log(err);
-    console.log("Erro ao cadastrar adm");
+    console.log(red("=> Erro ao criar o adm"));
   }
 }
 
 async function seedPostTags() {
   try {
+    const count = await prismaClient.postTags.count();
+
+    if (count) return console.log(yellow("! Tags já criadas !"));
+
     const types = [
       { name: "Saúde" },
       { name: "Tecnologia" },
@@ -43,19 +48,25 @@ async function seedPostTags() {
       data: types,
     });
 
-    console.log("Tags criadas");
+    console.log(green("Tags criadas com sucesso"));
   } catch (err: any) {
     console.log(err);
-    console.log("Erro ao crias as tags");
+    console.log(red("=> Erro ao criar as tags"));
   }
 }
 
 async function seedPosts() {
   try {
+    const count = await prismaClient.posts.count();
+
+    if (count) return console.log(yellow("! Posts já criados !"));
+
     const posts = [
       {
+        id: 1,
         name: "Perigo do covid 19 para nosso planeta",
         description: "Esse texto vai falar sobre a covid-19",
+        finished: true,
         adminId: 1,
         postTagsId: 1,
         author: "dev",
@@ -65,8 +76,10 @@ async function seedPosts() {
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1_VZCpcxqzWfLk2rmsHYfii5XOiNbv5mR0y77Ju9AqKl6nIVMa12_ILuCqGnEgqWZv7A&usqp=CAU",
       },
       {
+        id: 2,
         name: "Uma teoria sobre os dinossauros, eles são reais?",
         description: "Esse texto vai falar sobre os dinossauros",
+        finished: true,
         adminId: 1,
         postTagsId: 7,
         author: "dev",
@@ -76,8 +89,10 @@ async function seedPosts() {
           "https://s3.static.brasilescola.uol.com.br/be/2022/06/dinossauros.jpg",
       },
       {
+        id: 3,
         name: "Historia do brasil é importante",
         description: "Esse texto vai falar sobre o brasil",
+        finished: true,
         adminId: 1,
         postTagsId: 6,
         author: "dev",
@@ -86,8 +101,10 @@ async function seedPosts() {
           "https://s3.static.brasilescola.uol.com.br/be/2021/11/bandeira-do-brasil.jpg",
       },
       {
+        id: 4,
         name: "As inteligencias artificias e a humanidade",
         description: "Esse texto vai falar sobre as i.a",
+        finished: true,
         adminId: 1,
         postTagsId: 6,
         author: "dev",
@@ -101,12 +118,13 @@ async function seedPosts() {
       data: posts,
     });
 
-    console.log("Conteudo das postagens criada criadas");
+    console.log(green("Postagens criadas com sucesso"));
   } catch (err: any) {
     console.log(err);
-    console.log("Erro ao criar o conteudo das postagens");
+    console.log(red("=> Erro ao criar as postagens"));
   }
 }
+
 async function seedPostsContent() {
   try {
     const postsContent = [
@@ -276,10 +294,10 @@ async function seedPostsContent() {
       data: postsContent,
     });
 
-    console.log("Postagens criadas");
+    console.log(green("Seeds de postContent criadas com sucesso"));
   } catch (err: any) {
     console.log(err);
-    console.log("Erro ao criar as postagens");
+    console.log(red("=> Erro ao criar as postagens"));
   }
 }
 
