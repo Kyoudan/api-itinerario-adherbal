@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "tsup src/server.ts --format cjs,esm --dts-resolve --minify --clean --sourcemap --legacy-output && node dist/server.js",
     "test": "set DATABASE_URL=postgresql://postgres:postgres@localhost:5432/Itinerario-Testes?schema=public && jest --passWithNoTests",
     "test:migrate": "set DATABASE_URL=postgresql://postgres:postgres@localhost:5432/Itinerario-Testes?schema=public && npx prisma migrate dev",
     "test:seed": "set DATABASE_URL=postgresql://postgres:postgres@localhost:5432/Itinerario-Testes?schema=public && npx prisma db seed",
