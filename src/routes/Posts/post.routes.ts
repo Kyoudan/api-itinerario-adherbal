@@ -26,6 +26,6 @@ routes.post("/publish/:id", AuthAdmin, PublishingPostController);
 routes.put("/postAll", AuthAdmin, UpdateAllPostController);
 routes.put("/post/:id", UpdatePostsController);
 
-routes.delete("/post/:id", DeletePostsController);
+routes.delete("/post/:uuid", DeletePostsController);
 
 export default routes;

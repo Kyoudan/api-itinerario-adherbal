@@ -3,20 +3,19 @@ import prismaClient from "../../../database/prismaClient";
 
 export const DeletePostsController = async (req: Request, res: Response) => {
   try {
-    const queryId = req.params.id;
+    const uuid = req.params.uuid;
+    if (!uuid) return res.status(400).json({ message: "Uuid invalido!!" });
 
-    if (!queryId) return res.status(400).json({ message: "id invalido!!" });
-    const id = parseInt(queryId);
-    if (isNaN(id)) return res.status(400).json({ message: "id is NaN" });
     const result = await prismaClient.posts.delete({
       where: {
-        id,
+        uuid: uuid,
       },
     });
+
     if (result) {
       res.status(200).json({ message: "Postagem apagada com sucesso!!" });
     } else {
-      res.status(400).json({ message: "Id não encontrado" });
+      res.status(400).json({ message: "Uuid não encontrado" });
     }
   } catch (err: any) {
     if (

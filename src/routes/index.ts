@@ -4,7 +4,7 @@ import PostRoutes from "./Posts/post.routes";
 import PostContentRoutes from "./Posts/postContent.routes";
 import featuredPostsRoutes from "./Posts/featuredPost.routes";
 import adminRoutes from "./admin.routes";
-import prismaClient from "@/database/prismaClient";
+import prismaClient from "../database/prismaClient";
 const routes = Router();
 
 routes.use(PostTagsRoutes);
