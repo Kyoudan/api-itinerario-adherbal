@@ -9,9 +9,7 @@ const jwt_secret = process.env.JWT_SECRET_ADM as string;
 export default (req: UserType, res: Response, next: NextFunction) => {
   try {
     const token = req.headers.authorization;
-
     if (!token) return res.status(401).json({ message: "Token invalido!!" });
-
     const verifyToken = jwt.verify(token, jwt_secret);
     if (verifyToken) {
       req.user = verifyToken as jwt_payload;

@@ -25,7 +25,7 @@ export const CreatePostContentController = async (
       });
     }
 
-    if (type != "image" && !size)
+    if (type == "text" && !size)
       return res.status(400).json({ message: "Tamanho invalido!!" });
 
     const orderedUser = await prismaClient.postContent.findFirst({

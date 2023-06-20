@@ -9,6 +9,6 @@ const routes = Router();
 routes.get("/featuredposts", FindAllFeaturedPostsController);
 routes.post("/featuredposts", AuthAdmin, CreateFeaturedPostsController);
 routes.put("/featuredposts", AuthAdmin, UpdatedFeaturedPostsController);
-routes.delete("/featuredposts", AuthAdmin, DeleteFeaturedPostsController);
+routes.delete("/featuredposts/:uuid", AuthAdmin, DeleteFeaturedPostsController);
 
 export default routes;

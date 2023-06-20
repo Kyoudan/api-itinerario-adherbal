@@ -27,7 +27,7 @@ export const CreateFeaturedPostsController = async (
         isFixed: true,
       },
       where: {
-        id: postId,
+        uuid: postId,
       },
     });
     res

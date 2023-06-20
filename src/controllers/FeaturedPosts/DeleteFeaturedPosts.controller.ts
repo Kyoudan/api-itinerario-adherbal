@@ -6,18 +6,16 @@ export const DeleteFeaturedPostsController = async (
   res: Response
 ) => {
   try {
-    const postId = req.params.id;
+    const postId = req.params.uuid;
 
     if (!postId) return res.status(400).json({ message: "Id invalido!!" });
-    const id = parseInt(postId);
-    if (isNaN(id)) return res.status(400).json({ message: "Id is NaN" });
 
     await prismaClient.posts.update({
       data: {
         isFixed: false,
       },
       where: {
-        id,
+        uuid: postId,
       },
     });
 

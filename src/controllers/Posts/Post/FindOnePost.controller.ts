@@ -18,6 +18,7 @@ export const FindOnePostController = async (req: Request, res: Response) => {
         author: true,
         finished: true,
         description: true,
+        isFixed: true,
         createdAt: true,
         postTags: {
           select: {
