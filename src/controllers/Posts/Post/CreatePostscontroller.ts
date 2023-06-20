@@ -16,6 +16,7 @@ export const CreatePostController = async (req: UserType, res: Response) => {
 
     const slug = name.replace(/ /g, "-").toLowerCase();
 
+
     const result = await prismaClient.posts.create({
       data: {
         name,
@@ -27,14 +28,18 @@ export const CreatePostController = async (req: UserType, res: Response) => {
       },
     });
 
-    res.status(201).json({ message: "Postagem criada com sucesso!!", uuid: result.uuid });
+    res
+      .status(201)
+      .json({ message: "Postagem criada com sucesso!!", uuid: result.uuid });
   } catch (err: any) {
-    if (err.meta.target && err.meta.target[0] == "slug") {
-      return res.status(400).json({ message: "Nome ja cadastrado" });
-    }
+    if (err.meta) {
+      if (err.meta.target && err.meta.target[0] == "slug") {
+        return res.status(400).json({ message: "Nome ja cadastrado" });
+      }
 
-    if (err.meta.field_name && err.meta.field_name.includes("categoryId")) {
-      return res.status(400).json({ message: "Categoria não existente" });
+      if (err.meta.field_name && err.meta.field_name.includes("categoryId")) {
+        return res.status(400).json({ message: "Categoria não existente" });
+      }
     }
 
     if (

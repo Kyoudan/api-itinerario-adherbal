@@ -158,7 +158,7 @@ async function seedPostsContent() {
         type: "text",
         size: 1,
         PostsId: 1,
-        order: 3,
+        order: 4,
       },
       {
         content:
@@ -166,7 +166,7 @@ async function seedPostsContent() {
         type: "text",
         size: 1,
         PostsId: 1,
-        order: 4,
+        order: 5,
       }, // a //
       {
         content:
@@ -174,7 +174,7 @@ async function seedPostsContent() {
         type: "text",
         size: 1,
         PostsId: 2,
-        order: 4,
+        order: 1,
       },
       {
         content:
@@ -182,7 +182,7 @@ async function seedPostsContent() {
         type: "text",
         size: 1,
         PostsId: 2,
-        order: 4,
+        order: 2,
       },
       {
         content:
@@ -190,7 +190,7 @@ async function seedPostsContent() {
         type: "image",
         size: undefined,
         PostsId: 2,
-        order: 4,
+        order: 3,
       },
       {
         content:
@@ -206,7 +206,7 @@ async function seedPostsContent() {
         type: "text",
         size: 1,
         PostsId: 2,
-        order: 4,
+        order: 5,
       }, // b
       {
         content:
@@ -214,7 +214,7 @@ async function seedPostsContent() {
         type: "text",
         size: 1,
         PostsId: 3,
-        order: 4,
+        order: 1,
       },
       {
         content:
@@ -222,7 +222,7 @@ async function seedPostsContent() {
         type: "text",
         size: 1,
         PostsId: 3,
-        order: 4,
+        order: 2,
       },
       {
         content:
@@ -230,7 +230,7 @@ async function seedPostsContent() {
         type: "image",
         size: undefined,
         PostsId: 3,
-        order: 4,
+        order: 3,
       },
       {
         content:
@@ -246,7 +246,7 @@ async function seedPostsContent() {
         type: "text",
         size: 1,
         PostsId: 3,
-        order: 4,
+        order: 5,
       }, // c
       {
         content:
@@ -254,7 +254,7 @@ async function seedPostsContent() {
         type: "text",
         size: 1,
         PostsId: 4,
-        order: 4,
+        order: 1,
       },
       {
         content:
@@ -262,7 +262,7 @@ async function seedPostsContent() {
         type: "image",
         size: undefined,
         PostsId: 4,
-        order: 4,
+        order: 2,
       },
       {
         content:
@@ -270,7 +270,7 @@ async function seedPostsContent() {
         type: "text",
         size: 1,
         PostsId: 4,
-        order: 4,
+        order: 3,
       },
       {
         content:
@@ -286,7 +286,7 @@ async function seedPostsContent() {
         type: "text",
         size: 1,
         PostsId: 4,
-        order: 4,
+        order: 5,
       }, //d
     ];
 

@@ -2,7 +2,10 @@ import { Response } from "express";
 import { Request } from "express";
 import prismaClient from "../../../database/prismaClient";
 
-export const FindAllPostsPublicController = async (req: Request, res: Response) => {
+export const FindAllPostsPublicController = async (
+  req: Request,
+  res: Response
+) => {
   try {
     let queryInit = req.query.init as string;
     let queryLimit = req.query.limit as string;
@@ -62,6 +65,7 @@ export const FindAllPostsPublicController = async (req: Request, res: Response) 
               content: true,
               type: true,
               size: true,
+              reference: true,
             },
           },
         },
@@ -105,7 +109,7 @@ export const FindAllPostsPublicController = async (req: Request, res: Response) 
               content: true,
               type: true,
               size: true,
-              reference: true
+              reference: true,
             },
           },
         },
@@ -146,7 +150,7 @@ export const FindAllPostsPublicController = async (req: Request, res: Response) 
               content: true,
               type: true,
               size: true,
-              reference: true
+              reference: true,
             },
           },
         },
@@ -186,7 +190,7 @@ export const FindAllPostsPublicController = async (req: Request, res: Response) 
               content: true,
               type: true,
               size: true,
-              reference: true
+              reference: true,
             },
           },
         },
