@@ -17,7 +17,14 @@ const boostrapStart = async () => {
   await server.start();
   server.applyMiddleware({ app });
 
-  app.use(cors());
+  const corsOptions = process.env.CORS_ORIGIN?.split(",") || "*";
+  
+  app.use(
+    cors({
+      origin: corsOptions,
+      optionsSuccessStatus: 200,
+    })
+  );
   app.use(express.json(), express.urlencoded({ extended: true }));
   app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
   app.use(routes);
